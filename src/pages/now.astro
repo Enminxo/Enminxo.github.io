@@ -1,0 +1,70 @@
+---
+import ContactCTA from '../components/ContactCTA.astro';
+import Hero from '../components/Hero.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { useTranslations } from '../i18n/translations';
+
+const lang = 'en';
+const t = useTranslations(lang);
+const lastUpdated = 'May 2026';
+---
+
+<BaseLayout title="Now | Enmin Zhong" description={t('now.intro')} lang={lang}>
+	<div class="stack gap-20">
+		<main class="wrapper stack gap-8">
+			<Hero title={t('now.title')} tagline={t('now.intro')} align="start" />
+
+			<div class="content">
+				<p class="updated">{t('now.updated')}: {lastUpdated}</p>
+
+				<ul>
+					<li>Assembling and setting up Raspberry Pi 5 + AI HAT 2 — step one of the EgoAgent build</li>
+					<li>Working on egocentric video understanding research at GTI-UPM</li>
+					<li>Exploring lightweight VLMs for edge inference on Hailo hardware</li>
+					<li>Building my personal NFC pin — a 3D-printed wearable that links to this site</li>
+				</ul>
+
+				<p class="about-now">
+					The <a href="https://nownownow.com/about" target="_blank" rel="noopener noreferrer">/now page</a> is a concept from Derek Sivers — a snapshot of what you're focused on right now.
+				</p>
+			</div>
+		</main>
+
+		<ContactCTA lang={lang} />
+	</div>
+</BaseLayout>
+
+<style>
+	.content {
+		max-width: 65ch;
+	}
+
+	.updated {
+		color: var(--gray-400);
+		font-size: var(--text-sm);
+		margin-bottom: 2rem;
+	}
+
+	ul {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		padding-left: 1.5rem;
+		color: var(--gray-200);
+		font-size: var(--text-md);
+		line-height: 1.6;
+	}
+
+	.about-now {
+		margin-top: 3rem;
+		color: var(--gray-400);
+		font-size: var(--text-sm);
+	}
+
+	.about-now a {
+		color: var(--accent-regular);
+		text-decoration: none;
+	}
+
+	.about-now a:hover { text-decoration: underline; }
+</style>

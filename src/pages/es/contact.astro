@@ -1,0 +1,41 @@
+---
+import Icon from '../../components/Icon.astro';
+import Hero from '../../components/Hero.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useTranslations } from '../../i18n/translations';
+
+const lang = 'es';
+const t = useTranslations(lang);
+---
+
+<BaseLayout title="Contacto | Enmin Zhong" description={t('contact.desc')} lang={lang}>
+	<main class="wrapper stack gap-12">
+		<Hero title={t('contact.title')} tagline={t('contact.desc')} align="start" />
+		<ul class="contact-list">
+			<li>
+				<a class="contact-link" href="mailto:enminzhong@gmail.com">
+					<Icon icon="paper-plane-tilt" size="1.5em" />
+					<span>enminzhong@gmail.com</span>
+				</a>
+			</li>
+			<li>
+				<a class="contact-link" href="https://github.com/enminzhong" target="_blank" rel="noopener noreferrer">
+					<Icon icon="github-logo" size="1.5em" />
+					<span>github.com/enminzhong</span>
+				</a>
+			</li>
+			<li>
+				<a class="contact-link" href="https://linkedin.com/in/enminzhong" target="_blank" rel="noopener noreferrer">
+					<Icon icon="linkedin-logo" size="1.5em" />
+					<span>linkedin.com/in/enminzhong</span>
+				</a>
+			</li>
+		</ul>
+	</main>
+</BaseLayout>
+
+<style>
+	.contact-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 1.5rem; }
+	.contact-link { display: flex; align-items: center; gap: 1rem; color: var(--gray-200); text-decoration: none; font-size: var(--text-lg); transition: color var(--theme-transition); }
+	.contact-link:hover { color: var(--accent-regular); }
+</style>

@@ -1,22 +1,31 @@
 ---
 import Icon from './Icon.astro';
+import type { Lang } from '../i18n/translations';
+import { useTranslations } from '../i18n/translations';
+
+interface Props {
+	lang?: Lang;
+}
+
+const { lang = 'en' } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <section class="box skills">
 	<div class="stack gap-2 lg:gap-4">
-		<Icon icon="terminal-window" color="var(--accent-regular)" size="2.5rem" gradient />
-		<h2>Full Stack</h2>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
+		<Icon icon="code" color="var(--accent-regular)" size="2.5rem" gradient />
+		<h2>{t('research.area1.title')}</h2>
+		<p>{t('research.area1.desc')}</p>
 	</div>
 	<div class="stack gap-2 lg:gap-4">
-		<Icon icon="trophy" color="var(--accent-regular)" size="2.5rem" gradient />
-		<h2>Industry Leader</h2>
-		<p>Neque viverra justo nec ultrices dui. Est ultricies integer quis auctor elit.</p>
+		<Icon icon="rocket-launch" color="var(--accent-regular)" size="2.5rem" gradient />
+		<h2>{t('research.area2.title')}</h2>
+		<p>{t('research.area2.desc')}</p>
 	</div>
 	<div class="stack gap-2 lg:gap-4">
 		<Icon icon="strategy" color="var(--accent-regular)" size="2.5rem" gradient />
-		<h2>Strategy-Minded</h2>
-		<p>Urna porttitor rhoncus dolor purus non enim praesent ornare.</p>
+		<h2>{t('research.area3.title')}</h2>
+		<p>{t('research.area3.desc')}</p>
 	</div>
 </section>
 
@@ -35,13 +44,8 @@ import Icon from './Icon.astro';
 		gap: 3rem;
 	}
 
-	.skills h2 {
-		font-size: var(--text-lg);
-	}
-
-	.skills p {
-		color: var(--gray-400);
-	}
+	.skills h2 { font-size: var(--text-lg); }
+	.skills p { color: var(--gray-400); }
 
 	@media (min-width: 50em) {
 		.box {
@@ -55,8 +59,6 @@ import Icon from './Icon.astro';
 			gap: 5rem;
 		}
 
-		.skills h2 {
-			font-size: var(--text-2xl);
-		}
+		.skills h2 { font-size: var(--text-2xl); }
 	}
 </style>

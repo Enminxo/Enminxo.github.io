@@ -1,12 +1,21 @@
 ---
 import CallToAction from './CallToAction.astro';
 import Icon from './Icon.astro';
+import type { Lang } from '../i18n/translations';
+import { useTranslations } from '../i18n/translations';
+
+interface Props {
+	lang?: Lang;
+}
+
+const { lang = 'en' } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <aside>
-	<h2>Interested in working together?</h2>
-	<CallToAction href="mailto:me@example.com">
-		Send Me a Message
+	<h2>{t('contact.cta')}</h2>
+	<CallToAction href={lang === 'es' ? '/es/contact/' : '/contact/'}>
+		{t('contact.button')}
 		<Icon icon="paper-plane-tilt" size="1.2em" />
 	</CallToAction>
 </aside>

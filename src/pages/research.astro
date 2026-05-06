@@ -1,0 +1,112 @@
+---
+import { getCollection } from 'astro:content';
+import ContactCTA from '../components/ContactCTA.astro';
+import Hero from '../components/Hero.astro';
+import Icon from '../components/Icon.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { useTranslations } from '../i18n/translations';
+
+const lang = 'en';
+const t = useTranslations(lang);
+
+const lines = (await getCollection('research')).sort((a, b) => a.data.order - b.data.order);
+const publications = (await getCollection('publications')).sort((a, b) => b.data.year - a.data.year);
+---
+
+<BaseLayout title="Research | Enmin Zhong" description={t('research.subtitle')} lang={lang}>
+	<div class="stack gap-20">
+		<main class="wrapper stack gap-16">
+			<Hero title={t('research.title')} tagline={t('research.subtitle')} align="start" />
+
+			<section>
+				<h2 class="section-title">{t('research.lines')}</h2>
+				<ul class="research-list">
+					{lines.map((line) => (
+						<li class="research-card">
+							<div class="card-header">
+								<h3>{line.data.title}</h3>
+								<span class={`status status-${line.data.status}`}>{line.data.status}</span>
+							</div>
+							<p>{line.data.description}</p>
+						</li>
+					))}
+				</ul>
+			</section>
+
+			<section>
+				<h2 class="section-title">{t('research.publications')}</h2>
+				{publications.length === 0 || (publications.length === 1 && publications[0].id === 'example')
+					? <p class="muted">{t('research.nopubs')}</p>
+					: (
+						<ul class="pub-list">
+							{publications.filter(p => p.id !== 'example').map((pub) => (
+								<li class="pub-card">
+									<div class="pub-venue">{pub.data.venue} · {pub.data.year}</div>
+									<h4 class="pub-title">{pub.data.title}</h4>
+									<p class="pub-authors">{pub.data.authors}</p>
+									{pub.data.abstract && <p class="pub-abstract">{pub.data.abstract}</p>}
+									<div class="pub-links">
+										{pub.data.pdf && (
+											<a href={pub.data.pdf} class="pub-link" target="_blank" rel="noopener noreferrer">
+												<Icon icon="arrow-right" size="0.9em" /> PDF
+											</a>
+										)}
+										{pub.data.code && (
+											<a href={pub.data.code} class="pub-link" target="_blank" rel="noopener noreferrer">
+												<Icon icon="github-logo" size="0.9em" /> Code
+											</a>
+										)}
+										{pub.data.project && (
+											<a href={pub.data.project} class="pub-link" target="_blank" rel="noopener noreferrer">
+												<Icon icon="rocket-launch" size="0.9em" /> Project
+											</a>
+										)}
+									</div>
+								</li>
+							))}
+						</ul>
+					)
+				}
+			</section>
+		</main>
+
+		<ContactCTA lang={lang} />
+	</div>
+</BaseLayout>
+
+<style>
+	.section-title {
+		font-size: var(--text-xl);
+		color: var(--gray-0);
+		margin-bottom: 1.5rem;
+	}
+
+	/* Research lines */
+	.research-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 1.25rem; }
+	.research-card { border: 1px solid var(--gray-800); border-radius: 0.75rem; padding: 1.5rem; background-color: var(--gray-999_40); }
+	.card-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+	.card-header h3 { font-size: var(--text-lg); color: var(--gray-0); }
+	.status { font-size: var(--text-sm); padding: 0.2rem 0.6rem; border-radius: 999rem; text-transform: uppercase; letter-spacing: 0.05em; }
+	.status-active { background-color: var(--accent-regular); color: var(--accent-text-over); }
+	.status-paused { background-color: var(--gray-800); color: var(--gray-300); }
+
+	/* Publications */
+	.pub-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 1.25rem; }
+	.pub-card { padding: 1.5rem; border: 1px solid var(--gray-800); border-radius: 0.75rem; background: var(--gray-999_40); }
+	.pub-venue { font-size: var(--text-sm); color: var(--accent-regular); font-weight: 600; margin-bottom: 0.4rem; }
+	.pub-title { font-size: var(--text-lg); color: var(--gray-0); font-weight: 600; margin: 0 0 0.3rem; }
+	.pub-authors { font-size: var(--text-sm); color: var(--gray-400); margin-bottom: 0.5rem; }
+	.pub-abstract { font-size: var(--text-sm); color: var(--gray-300); line-height: 1.5; margin-bottom: 0.75rem; }
+	.pub-links { display: flex; gap: 0.75rem; }
+	.pub-link { display: flex; align-items: center; gap: 0.3rem; font-size: var(--text-sm); color: var(--accent-regular); text-decoration: none; font-weight: 500; }
+	.pub-link:hover { text-decoration: underline; }
+
+	.muted { color: var(--gray-400); }
+
+	@media (min-width: 50em) {
+		.section-title { font-size: var(--text-2xl); }
+		.research-card { padding: 2rem; border-radius: 1.5rem; }
+		.pub-card { padding: 2rem; border-radius: 1.5rem; }
+		.pub-title { font-size: var(--text-xl); }
+	}
+</style>

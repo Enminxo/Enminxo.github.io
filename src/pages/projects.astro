@@ -5,33 +5,28 @@ import Grid from '../components/Grid.astro';
 import Hero from '../components/Hero.astro';
 import PortfolioPreview from '../components/PortfolioPreview.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { useTranslations } from '../i18n/translations';
+
+const lang = 'en';
+const t = useTranslations(lang);
 
 const projects = (await getCollection('work')).sort(
 	(a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
 );
 ---
 
-<BaseLayout
-	title="My Work | Jeanine White"
-	description="Learn about Jeanine White's most recent projects"
->
+<BaseLayout title="Projects | Enmin Zhong" description={t('projects.subtitle')} lang={lang}>
 	<div class="stack gap-20">
 		<main class="wrapper stack gap-8">
-			<Hero
-				title="My Work"
-				tagline="See my most recent projects below to get an idea of my past experience."
-				align="start"
-			/>
+			<Hero title={t('projects.title')} tagline={t('projects.subtitle')} align="start" />
 			<Grid variant="offset">
-				{
-					projects.map((project) => (
-						<li>
-							<PortfolioPreview project={project} />
-						</li>
-					))
-				}
+				{projects.map((project) => (
+					<li>
+						<PortfolioPreview project={project} />
+					</li>
+				))}
 			</Grid>
 		</main>
-		<ContactCTA />
+		<ContactCTA lang={lang} />
 	</div>
 </BaseLayout>

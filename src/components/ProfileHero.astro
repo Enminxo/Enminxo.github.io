@@ -1,0 +1,190 @@
+---
+import Icon from './Icon.astro';
+import type { Lang } from '../i18n/translations';
+import { useTranslations } from '../i18n/translations';
+
+interface Props {
+	lang?: Lang;
+}
+
+const { lang = 'en' } = Astro.props;
+const t = useTranslations(lang);
+
+const interests = [
+	t('interests.1'),
+	t('interests.2'),
+	t('interests.3'),
+	t('interests.4'),
+];
+
+const socials = [
+	{ label: 'GitHub', href: 'https://github.com/enminzhong', icon: 'github-logo' as const },
+	{ label: 'LinkedIn', href: 'https://linkedin.com/in/enminzhong', icon: 'linkedin-logo' as const },
+	{ label: 'Email', href: 'mailto:enminzhong@gmail.com', icon: 'paper-plane-tilt' as const },
+];
+---
+
+<div class="profile-hero">
+	<div class="photo-wrap">
+		<img
+			src="/assets/Me_castaños.jpeg"
+			alt="Enmin Zhong"
+			class="photo"
+			width="200"
+			height="200"
+		/>
+	</div>
+
+	<div class="bio">
+		<h1 class="name">Enmin Zhong</h1>
+		<p class="role">{t('hero.role')}</p>
+		<p class="institution">
+			<a href="https://www.gti.ssr.upm.es" target="_blank" rel="noopener noreferrer">GTI</a>
+			· Universidad Politécnica de Madrid · Madrid, Spain
+		</p>
+
+		<p class="tagline">{t('hero.tagline')}</p>
+
+		<div class="interests">
+			{interests.map((i) => <span class="chip">{i}</span>)}
+		</div>
+
+		<div class="socials">
+			{socials.map(({ label, href, icon }) => (
+				<a href={href} class="social-btn" target={href.startsWith('http') ? '_blank' : undefined} rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}>
+					<Icon icon={icon} size="1.1em" />
+					<span>{label}</span>
+				</a>
+			))}
+		</div>
+	</div>
+</div>
+
+<style>
+	.profile-hero {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 2rem;
+		padding: 2rem 0;
+	}
+
+	.photo-wrap {
+		flex-shrink: 0;
+	}
+
+	.photo {
+		width: 160px;
+		height: 160px;
+		border-radius: 50%;
+		object-fit: cover;
+		border: 3px solid var(--accent-regular);
+		box-shadow: 0 0 0 6px var(--accent-regular-eye-light, color-mix(in srgb, var(--accent-regular) 15%, transparent));
+	}
+
+	.bio {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		text-align: center;
+	}
+
+	.name {
+		font-size: var(--text-4xl);
+		color: var(--gray-0);
+		line-height: 1.1;
+		margin: 0;
+	}
+
+	.role {
+		font-size: var(--text-lg);
+		color: var(--accent-regular);
+		font-weight: 600;
+		margin: 0;
+	}
+
+	.institution {
+		font-size: var(--text-sm);
+		color: var(--gray-400);
+		margin: 0;
+	}
+
+	.institution a {
+		color: var(--gray-300);
+		text-decoration: none;
+	}
+	.institution a:hover { color: var(--accent-regular); }
+
+	.tagline {
+		font-size: var(--text-md);
+		color: var(--gray-300);
+		font-style: italic;
+		margin: 0.5rem 0;
+	}
+
+	.interests {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		justify-content: center;
+		margin-top: 0.5rem;
+	}
+
+	.chip {
+		font-size: var(--text-sm);
+		padding: 0.3rem 0.8rem;
+		border-radius: 999rem;
+		background: color-mix(in srgb, var(--accent-regular) 15%, transparent);
+		color: var(--accent-regular);
+		border: 1px solid color-mix(in srgb, var(--accent-regular) 40%, transparent);
+		font-weight: 500;
+	}
+
+	.socials {
+		display: flex;
+		gap: 0.75rem;
+		justify-content: center;
+		flex-wrap: wrap;
+		margin-top: 0.75rem;
+	}
+
+	.social-btn {
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+		padding: 0.4rem 0.9rem;
+		border-radius: 999rem;
+		border: 1px solid var(--gray-700);
+		color: var(--gray-300);
+		text-decoration: none;
+		font-size: var(--text-sm);
+		font-family: var(--font-brand);
+		font-weight: 500;
+		transition: color var(--theme-transition), border-color var(--theme-transition), background var(--theme-transition);
+	}
+
+	.social-btn:hover {
+		color: var(--gray-0);
+		border-color: var(--gray-400);
+		background: var(--gray-800);
+	}
+
+	@media (min-width: 50em) {
+		.profile-hero {
+			flex-direction: row;
+			align-items: flex-start;
+			gap: 3.5rem;
+			padding: 3rem 0;
+		}
+
+		.photo {
+			width: 200px;
+			height: 200px;
+		}
+
+		.bio { text-align: left; }
+
+		.interests { justify-content: flex-start; }
+		.socials { justify-content: flex-start; }
+	}
+</style>

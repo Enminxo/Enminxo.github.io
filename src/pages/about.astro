@@ -2,61 +2,52 @@
 import ContactCTA from '../components/ContactCTA.astro';
 import Hero from '../components/Hero.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { useTranslations } from '../i18n/translations';
+
+const lang = 'en';
+const t = useTranslations(lang);
 ---
 
-<BaseLayout title="About | Jeanine White" description="About Jeanine White Lorem Ipsum">
+<BaseLayout title="About | Enmin Zhong" description={t('bio.title')} lang={lang}>
 	<div class="stack gap-20">
 		<main class="wrapper about">
-			<Hero
-				title="About"
-				tagline="Thanks for stopping by. Read below to learn more about myself and my background."
-			>
-				<img
-					width="1553"
-					height="873"
-					src="/assets/at-work.jpg"
-					alt="Jeanine White at work with a colleague"
-				/>
-			</Hero>
+			<Hero title={t('bio.title')} tagline="GTI-UPM · Madrid, Spain" align="start" />
 
 			<section>
-				<h2 class="section-title">Background</h2>
+				<h2 class="section-title">Bio</h2>
 				<div class="content">
-					<p>
-						Lorem ipsum dolor sit amet, <a href="https://astro.build/">Astro</a> makes people happy. Sed
-						do eiusmod tempor incididunt ut labore et dolore magna aliqua. Proin nibh nisl condimentum
-						id venenatis a condimentum vitae. Dapibus ultrices in iaculis nunc. Arcu odio ut sem nulla
-						pharetra diam sit amet. Diam quis enim lobortis scelerisque fermentum dui faucibus in ornare.
-					</p>
-					<p>
-						Arcu dui vivamus arcu felis bibendum ut tristique et egestas. Eget gravida cum sociis
-						natoque penatibus. Cras fermentum odio eu feugiat pretium nibh. Proin nibh nisl
-						condimentum id venenatis. Porta nibh venenatis cras sed felis eget velit. Id diam vel
-						quam elementum pulvinar etiam non.
-					</p>
-					<p>
-						Ultrices tincidunt arcu non sodales neque sodales ut. Sed enim ut sem viverra aliquet
-						eget sit amet. Lacus luctus accumsan tortor posuere ac ut consequat semper viverra.
-						Viverra accumsan in nisl nisi scelerisque eu ultrices. In massa tempor nec feugiat nisl
-						pretium fusce.
-					</p>
+					<p>{t('bio.p1')}</p>
+					<p>{t('bio.p2')}</p>
 				</div>
 			</section>
+
 			<section>
-				<h2 class="section-title">Education</h2>
+				<h2 class="section-title">{t('interests.label')}</h2>
 				<div class="content">
-					<p>Corporis voluptates tenetur laudantium.</p>
+					<ul>
+						<li>{t('interests.1')}</li>
+						<li>{t('interests.2')}</li>
+						<li>{t('interests.3')}</li>
+						<li>{t('interests.4')}</li>
+					</ul>
 				</div>
 			</section>
+
 			<section>
-				<h2 class="section-title">Skills</h2>
+				<h2 class="section-title">Institution</h2>
 				<div class="content">
-					<p>officia unde omnis</p>
+					<p>
+						<a href="https://www.gti.ssr.upm.es" target="_blank" rel="noopener noreferrer">
+							Grupo de Tratamiento de Imágenes (GTI)
+						</a>
+						<br />
+						Universidad Politécnica de Madrid
+					</p>
 				</div>
 			</section>
 		</main>
 
-		<ContactCTA />
+		<ContactCTA lang={lang} />
 	</div>
 </BaseLayout>
 
@@ -65,12 +56,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		display: flex;
 		flex-direction: column;
 		gap: 3.5rem;
-	}
-
-	img {
-		margin-top: 1.5rem;
-		border-radius: 1.5rem;
-		box-shadow: var(--shadow-md);
 	}
 
 	section {
@@ -86,20 +71,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		color: var(--gray-0);
 	}
 
-	.content {
-		grid-column: 2 / 4;
+	.content { grid-column: 2 / 4; }
+
+	.content p { line-height: 1.6; margin-bottom: 1rem; }
+
+	.content ul {
+		padding-left: 1.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
 	}
 
-	.content :global(a) {
-		text-decoration: 1px solid underline transparent;
-		text-underline-offset: 0.25em;
-		transition: text-decoration-color var(--theme-transition);
+	.content a {
+		color: var(--accent-regular);
+		text-decoration: none;
 	}
-
-	.content :global(a:hover),
-	.content :global(a:focus) {
-		text-decoration-color: currentColor;
-	}
+	.content a:hover { text-decoration: underline; }
 
 	@media (min-width: 50em) {
 		.about {
@@ -107,9 +94,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 			grid-template-columns: 1fr 60% 1fr;
 		}
 
-		.about > :global(:first-child) {
-			grid-column-start: 2;
-		}
+		.about > :global(:first-child) { grid-column-start: 2; }
 
 		section {
 			display: contents;

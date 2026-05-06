@@ -3,25 +3,26 @@
 // https://docs.astro.build/en/basics/layouts/
 
 import Footer from '../components/Footer.astro';
-// Component Imports
 import MainHead from '../components/MainHead.astro';
 import Nav from '../components/Nav.astro';
+import type { Lang } from '../i18n/translations';
 
 interface Props {
 	title?: string | undefined;
 	description?: string | undefined;
+	lang?: Lang;
 }
 
-const { title, description } = Astro.props;
+const { title, description, lang = 'en' } = Astro.props;
 ---
 
-<html lang="en">
+<html lang={lang}>
 	<head>
 		<MainHead title={title} description={description} />
 	</head>
 	<body>
 		<div class="stack backgrounds">
-			<Nav />
+			<Nav lang={lang} />
 			<slot />
 			<Footer />
 		</div>

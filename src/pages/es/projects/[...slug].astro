@@ -1,0 +1,269 @@
+---
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+
+import ContactCTA from '../../../components/ContactCTA.astro';
+import Hero from '../../../components/Hero.astro';
+import Icon from '../../../components/Icon.astro';
+import Pill from '../../../components/Pill.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { useTranslations, type Lang } from '../../../i18n/translations';
+import type { CollectionEntry } from 'astro:content';
+
+const lang = 'es';
+const t = useTranslations(lang);
+
+interface Props {
+	entry: CollectionEntry<'work'>;
+}
+
+export async function getStaticPaths() {
+	const work = await getCollection('work');
+	return work.map((entry) => ({
+		params: { slug: entry.id },
+		props: { entry },
+	}));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const allLogs = await getCollection('logs');
+// Only show EN entries in the index (ES translations are linked from them)
+const projectLogs = allLogs
+	.filter((log) => log.data.project === entry.id && log.data.lang === 'en')
+	.sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
+
+// Helper: find ES title/summary for a given EN log entry
+const getEs = (enLog: CollectionEntry<'logs'>) =>
+	allLogs.find((l) => l.data.lang === 'es' && l.data.translation_of === enLog.id);
+---
+
+<BaseLayout title={`${entry.data.title} | Enmin Zhong`} description={entry.data.description} lang={lang}>
+	<div class="stack gap-20">
+		<div class="stack gap-15">
+			<header>
+				<div class="wrapper stack gap-2">
+					<a class="back-link" href="/es/projects/"><Icon icon="arrow-left" /> {t('nav.projects')}</a>
+					<Hero title={entry.data.title} align="start">
+						<div class="details">
+							<div class="tags">
+								{entry.data.tags.map((tag) => <Pill>{tag}</Pill>)}
+							</div>
+							<p class="description">{entry.data.description}</p>
+						</div>
+					</Hero>
+				</div>
+			</header>
+
+			<main class="wrapper">
+				<div class="stack gap-10 content">
+					{entry.data.img && <img src={entry.data.img} alt={entry.data.img_alt || ''} />}
+					<div class="content">
+						<Content />
+					</div>
+				</div>
+
+				{projectLogs.length > 0 && (
+					<div class="build-log" id="log">
+						<h2 class="log-heading">{t('log.build_log')}</h2>
+						<ol class="log-list">
+							{projectLogs.map((log, i) => (
+								<li class="log-item">
+									<a class="log-link" href={`/es/log/${log.id}/`}>
+										<div class="log-number">#{i + 1}</div>
+										<div class="log-body">
+											<div class="log-meta">
+												<time datetime={log.data.date.toISOString()}>
+													{log.data.date.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}
+												</time>
+												{log.data.tags && (
+													<div class="log-tags">
+														{log.data.tags.map((tag) => <span class="log-tag">{tag}</span>)}
+													</div>
+												)}
+											</div>
+											<h3 class="log-title">{getEs(log)?.data.title ?? log.data.title}</h3>
+											<p class="log-summary">{getEs(log)?.data.summary ?? log.data.summary}</p>
+										</div>
+										<Icon icon="arrow-right" size="1em" class="log-arrow" />
+									</a>
+								</li>
+							))}
+						</ol>
+					</div>
+				)}
+			</main>
+		</div>
+		<ContactCTA lang={lang} />
+	</div>
+</BaseLayout>
+
+<style>
+	header {
+		padding-bottom: 2.5rem;
+		border-bottom: 1px solid var(--gray-800);
+	}
+
+	.back-link { display: none; }
+
+	.details {
+		display: flex;
+		flex-direction: column;
+		padding: 0.5rem;
+		gap: 1.5rem;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.tags { display: flex; gap: 0.5rem; }
+
+	.description {
+		font-size: var(--text-lg);
+		max-width: 54ch;
+	}
+
+	.content {
+		max-width: 65ch;
+		margin-inline: auto;
+	}
+
+	.content > :global(* + *) { margin-top: 1rem; }
+
+	.content :global(h1),
+	.content :global(h2),
+	.content :global(h3),
+	.content :global(h4),
+	.content :global(h5) { margin: 1.5rem 0; }
+
+	.content :global(img) {
+		border-radius: 1.5rem;
+		box-shadow: var(--shadow-sm);
+		background: var(--gradient-subtle);
+		border: 1px solid var(--gray-800);
+	}
+
+	.back-link,
+	.content :global(a) {
+		text-decoration: 1px solid underline transparent;
+		text-underline-offset: 0.25em;
+		transition: text-decoration-color var(--theme-transition);
+	}
+
+	.back-link:hover,
+	.back-link:focus,
+	.content :global(a:hover),
+	.content :global(a:focus) { text-decoration-color: currentColor; }
+
+	.build-log {
+		max-width: 65ch;
+		margin-inline: auto;
+		margin-top: 4rem;
+		padding-top: 3rem;
+		border-top: 1px solid var(--gray-800);
+	}
+
+	.log-heading {
+		font-size: var(--text-2xl);
+		color: var(--gray-0);
+		margin-bottom: 1.75rem;
+	}
+
+	.log-list {
+		list-style: none;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.log-link {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		padding: 1.25rem;
+		border: 1px solid var(--gray-800);
+		border-radius: 0.75rem;
+		background: var(--gray-999_40);
+		text-decoration: none;
+		color: inherit;
+		transition: border-color 0.15s, background 0.15s;
+	}
+
+	.log-link:hover {
+		border-color: var(--accent-regular);
+		background: var(--gray-900, #111);
+	}
+
+	.log-number {
+		font-size: var(--text-sm);
+		font-weight: 700;
+		color: var(--accent-regular);
+		min-width: 2.5rem;
+		flex-shrink: 0;
+		font-variant-numeric: tabular-nums;
+	}
+
+	.log-body { flex: 1; min-width: 0; }
+
+	.log-meta {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+		flex-wrap: wrap;
+		margin-bottom: 0.25rem;
+	}
+
+	.log-meta time {
+		font-size: var(--text-sm);
+		color: var(--gray-400);
+	}
+
+	.log-tags { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+
+	.log-tag {
+		font-size: var(--text-xs, 0.72rem);
+		color: var(--gray-400);
+		background: var(--gray-800);
+		border-radius: 999px;
+		padding: 0.1rem 0.55rem;
+	}
+
+	.log-title {
+		font-size: var(--text-md);
+		color: var(--gray-0);
+		font-weight: 600;
+		margin: 0 0 0.2rem;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.log-summary {
+		font-size: var(--text-sm);
+		color: var(--gray-400);
+		line-height: 1.4;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.log-arrow {
+		color: var(--gray-600);
+		flex-shrink: 0;
+		transition: color 0.15s, transform 0.15s;
+	}
+
+	.log-link:hover .log-arrow {
+		color: var(--accent-regular);
+		transform: translateX(2px);
+	}
+
+	@media (min-width: 50em) {
+		.back-link { display: block; align-self: flex-start; }
+		.details { flex-direction: row; gap: 2.5rem; }
+		.log-heading { font-size: var(--text-4xl); }
+		.log-link { padding: 1.5rem; border-radius: 1.25rem; }
+		.log-title { font-size: var(--text-lg); }
+	}
+</style>

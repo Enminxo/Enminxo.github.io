@@ -1,0 +1,322 @@
+---
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+
+import ContactCTA from '../../components/ContactCTA.astro';
+import Icon from '../../components/Icon.astro';
+import Pill from '../../components/Pill.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+	const logs = await getCollection('logs');
+	return logs
+		.filter((l) => l.data.lang === 'en')
+		.map((entry) => ({
+			params: { slug: entry.id },
+			props: { entry },
+		}));
+}
+
+interface Props {
+	entry: CollectionEntry<'logs'>;
+}
+
+const lang = 'en';
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const allWork = await getCollection('work');
+const project = allWork.find((w) => w.id === entry.data.project);
+
+const allLogs = await getCollection('logs');
+const projectLogs = allLogs
+	.filter((l) => l.data.project === entry.data.project && l.data.lang === 'en')
+	.sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
+const entryNumber = projectLogs.findIndex((l) => l.id === entry.id) + 1;
+
+const dateFormatted = entry.data.date.toLocaleDateString('en-GB', {
+	day: 'numeric',
+	month: 'long',
+	year: 'numeric',
+});
+---
+
+<BaseLayout title={`${entry.data.title} | ${project?.data.title ?? 'Build Log'}`} description={entry.data.summary} lang={lang}>
+	<div class="stack gap-20">
+		<div class="stack gap-15">
+			<header>
+				<div class="wrapper stack gap-3">
+					{project && (
+						<a class="back-link" href={`/projects/${project.id}/`}>
+							<Icon icon="arrow-left" /> {project.data.title}
+						</a>
+					)}
+					<div class="entry-meta">
+						<span class="entry-number">Entry #{entryNumber}</span>
+						<time class="entry-date" datetime={entry.data.date.toISOString()}>{dateFormatted}</time>
+					</div>
+					<h1 class="entry-title">{entry.data.title}</h1>
+					<p class="entry-summary">{entry.data.summary}</p>
+					{entry.data.tags && (
+						<div class="entry-tags">
+							{entry.data.tags.map((tag) => <Pill>{tag}</Pill>)}
+						</div>
+					)}
+				</div>
+			</header>
+
+			<main class="wrapper">
+				<div class="content">
+					{entry.data.img && (
+						<img src={entry.data.img} alt={entry.data.img_alt || ''} />
+					)}
+					<Content />
+				</div>
+
+				<!-- Prev / Next navigation -->
+				<nav class="log-nav">
+					{entryNumber > 1 && (
+						<a class="log-nav-link prev" href={`/log/${projectLogs[entryNumber - 2].id}/`}>
+							<Icon icon="arrow-left" size="0.9em" />
+							<span>
+								<span class="nav-label">Previous</span>
+								<span class="nav-title">{projectLogs[entryNumber - 2].data.title}</span>
+							</span>
+						</a>
+					)}
+					{entryNumber < projectLogs.length && (
+						<a class="log-nav-link next" href={`/log/${projectLogs[entryNumber].id}/`}>
+							<span>
+								<span class="nav-label">Next</span>
+								<span class="nav-title">{projectLogs[entryNumber].data.title}</span>
+							</span>
+							<Icon icon="arrow-right" size="0.9em" />
+						</a>
+					)}
+				</nav>
+			</main>
+		</div>
+		<ContactCTA />
+	</div>
+</BaseLayout>
+
+<style>
+	header {
+		padding-bottom: 2.5rem;
+		border-bottom: 1px solid var(--gray-800);
+	}
+
+	.back-link {
+		display: none;
+		align-items: center;
+		gap: 0.4rem;
+		font-size: var(--text-sm);
+		color: var(--gray-400);
+		text-decoration: none;
+	}
+	.back-link:hover { color: var(--gray-0); }
+
+	.entry-meta {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		margin-top: 0.5rem;
+	}
+
+	.entry-number {
+		font-size: var(--text-sm);
+		font-weight: 700;
+		color: var(--accent-regular);
+		text-transform: uppercase;
+		letter-spacing: 0.07em;
+	}
+
+	.entry-date {
+		font-size: var(--text-sm);
+		color: var(--gray-400);
+	}
+
+	.entry-title {
+		font-size: var(--text-3xl);
+		color: var(--gray-0);
+		font-weight: 700;
+		line-height: 1.15;
+		max-width: 20ch;
+	}
+
+	.entry-summary {
+		font-size: var(--text-md);
+		color: var(--gray-300);
+		max-width: 55ch;
+		line-height: 1.6;
+	}
+
+	.entry-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem;
+	}
+
+	/* Content */
+	.content {
+		max-width: 65ch;
+		margin-inline: auto;
+	}
+
+	.content > :global(* + *) { margin-top: 1rem; }
+
+	.content :global(h2) {
+		font-size: var(--text-xl);
+		font-weight: 700;
+		color: var(--gray-100);
+		margin: 2rem 0 0.6rem;
+	}
+
+	.content :global(h3) {
+		font-size: var(--text-lg);
+		font-weight: 600;
+		color: var(--gray-100);
+		margin: 1.75rem 0 0.5rem;
+	}
+
+	.content :global(h4) {
+		font-size: var(--text-md);
+		font-weight: 600;
+		color: var(--gray-200);
+		margin: 1.5rem 0 0.4rem;
+	}
+
+	.content :global(img) {
+		border-radius: 1rem;
+		box-shadow: var(--shadow-sm);
+		border: 1px solid var(--gray-800);
+		width: 100%;
+	}
+
+	.content :global(pre) {
+		border-radius: 0.75rem;
+		padding: 1.25rem;
+		overflow-x: auto;
+		font-size: var(--text-sm);
+		background: var(--gray-900, #0d0d0d);
+		border: 1px solid var(--gray-800);
+	}
+
+	.content :global(code:not(pre code)) {
+		font-size: 0.875em;
+		background: var(--gray-800);
+		padding: 0.1em 0.4em;
+		border-radius: 0.3em;
+	}
+
+	.content :global(ul),
+	.content :global(ol) {
+		padding-left: 1.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+	}
+
+	.content :global(a) {
+		color: var(--accent-regular);
+		text-underline-offset: 0.2em;
+	}
+
+	.content :global(table) {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: var(--text-sm);
+		margin: 1rem 0;
+	}
+
+	.content :global(th) {
+		text-align: left;
+		font-weight: 600;
+		color: var(--gray-300);
+		padding: 0.5rem 0.75rem;
+		border-bottom: 1px solid var(--gray-700);
+	}
+
+	.content :global(td) {
+		padding: 0.5rem 0.75rem;
+		color: var(--gray-200);
+		border-bottom: 1px solid var(--gray-800);
+		vertical-align: top;
+	}
+
+	.content :global(tr:last-child td) {
+		border-bottom: none;
+	}
+
+	.content :global(blockquote) {
+		border-left: 3px solid var(--accent-regular);
+		padding: 0.75rem 1rem;
+		margin: 1rem 0;
+		background: var(--gray-900, #0d0d0d);
+		border-radius: 0 0.5rem 0.5rem 0;
+		color: var(--gray-200);
+		font-size: var(--text-sm);
+	}
+
+	.content :global(blockquote strong) {
+		color: var(--accent-regular);
+	}
+
+	.content :global(hr) {
+		border: none;
+		border-top: 1px solid var(--gray-800);
+		margin: 2rem 0;
+	}
+
+	/* Prev/Next nav */
+	.log-nav {
+		max-width: 65ch;
+		margin-inline: auto;
+		margin-top: 4rem;
+		padding-top: 2rem;
+		border-top: 1px solid var(--gray-800);
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+
+	.log-nav-link {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+		text-decoration: none;
+		color: var(--gray-300);
+		max-width: 22ch;
+	}
+	.log-nav-link:hover { color: var(--gray-0); }
+
+	.log-nav-link span {
+		display: flex;
+		flex-direction: column;
+		gap: 0.1rem;
+	}
+
+	.log-nav-link.next {
+		margin-left: auto;
+		text-align: right;
+	}
+	.log-nav-link.next span { align-items: flex-end; }
+
+	.nav-label {
+		font-size: var(--text-xs, 0.75rem);
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--gray-400);
+		font-weight: 600;
+	}
+
+	.nav-title {
+		font-size: var(--text-sm);
+		font-weight: 500;
+	}
+
+	@media (min-width: 50em) {
+		.back-link { display: flex; }
+		.entry-title { font-size: var(--text-4xl); }
+	}
+</style>
