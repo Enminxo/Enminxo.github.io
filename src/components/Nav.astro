@@ -3,7 +3,7 @@ import Icon from './Icon.astro';
 import type { iconPaths } from './IconPaths';
 import ThemeToggle from './ThemeToggle.astro';
 import type { Lang } from '../i18n/translations';
-import { useTranslations, getAlternateLangPath } from '../i18n/translations';
+import { useTranslations } from '../i18n/translations';
 
 interface Props {
 	lang?: Lang;
@@ -13,11 +13,11 @@ const { lang = 'en' } = Astro.props;
 const t = useTranslations(lang);
 
 const textLinks = [
-	{ label: t('nav.home'), href: lang === 'es' ? '/es/' : '/' },
-	{ label: t('nav.research'), href: lang === 'es' ? '/es/research/' : '/research/' },
-	{ label: t('nav.projects'), href: lang === 'es' ? '/es/projects/' : '/projects/' },
-	{ label: t('nav.now'), href: lang === 'es' ? '/es/now/' : '/now/' },
-	{ label: t('nav.contact'), href: lang === 'es' ? '/es/contact/' : '/contact/' },
+	{ label: t('nav.home'), href: '/' },
+	{ label: t('nav.research'), href: '/research/' },
+	{ label: t('nav.projects'), href: '/projects/' },
+	{ label: t('nav.now'), href: '/now/' },
+	{ label: t('nav.contact'), href: '/contact/' },
 ];
 
 const iconLinks: { label: string; href: string; icon: keyof typeof iconPaths }[] = [
@@ -25,20 +25,17 @@ const iconLinks: { label: string; href: string; icon: keyof typeof iconPaths }[]
 	{ label: 'LinkedIn', href: 'https://www.linkedin.com/in/enminz/', icon: 'linkedin-logo' },
 ];
 
-const alternateLang = lang === 'en' ? 'es' : 'en';
-const alternatePath = getAlternateLangPath(lang, Astro.url.pathname);
-
 const isCurrentPage = (href: string) => {
 	let pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
 	if (pathname.at(0) !== '/') pathname = '/' + pathname;
 	if (pathname.at(-1) !== '/') pathname += '/';
-	return pathname === href || (href !== '/' && href !== '/es/' && pathname.startsWith(href));
+	return pathname === href || (href !== '/' && pathname.startsWith(href));
 };
 ---
 
 <nav>
 	<div class="menu-header">
-		<a href={lang === 'es' ? '/es/' : '/'} class="site-title">
+		<a href="/" class="site-title">
 			<Icon icon="terminal-window" color="var(--accent-regular)" size="1.6em" gradient />
 			Enmin Zhong
 		</a>
@@ -80,9 +77,6 @@ const isCurrentPage = (href: string) => {
 						<Icon icon={icon} />
 					</a>
 				))}
-				<a href={alternatePath} class="social lang-toggle" title={alternateLang === 'es' ? 'Español' : 'English'}>
-					<span class="lang-label">{alternateLang.toUpperCase()}</span>
-				</a>
 			</div>
 			<div class="theme-toggle">
 				<ThemeToggle />

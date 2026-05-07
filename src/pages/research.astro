@@ -10,7 +10,7 @@ const lang = 'en';
 const t = useTranslations(lang);
 
 const lines = (await getCollection('research')).sort((a, b) => a.data.order - b.data.order);
-const publications = (await getCollection('publications')).sort((a, b) => b.data.year - a.data.year);
+const publications = (await getCollection('publications')).filter((p) => !p.data.hidden).sort((a, b) => b.data.year - a.data.year);
 ---
 
 <BaseLayout title="Research | Enmin Zhong" description={t('research.subtitle')} lang={lang}>
@@ -49,6 +49,11 @@ const publications = (await getCollection('publications')).sort((a, b) => b.data
 										{pub.data.pdf && (
 											<a href={pub.data.pdf} class="pub-link" target="_blank" rel="noopener noreferrer">
 												<Icon icon="arrow-right" size="0.9em" /> PDF
+											</a>
+										)}
+										{pub.data.poster && (
+											<a href={pub.data.poster} class="pub-link" target="_blank" rel="noopener noreferrer">
+												<Icon icon="arrow-right" size="0.9em" /> Poster
 											</a>
 										)}
 										{pub.data.code && (

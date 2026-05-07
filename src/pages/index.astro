@@ -17,7 +17,7 @@ const projects = (await getCollection('work'))
 	.slice(0, 3);
 
 const publications = (await getCollection('publications'))
-	.filter((p) => p.data.featured)
+	.filter((p) => p.data.featured && !p.data.hidden)
 	.sort((a, b) => b.data.year - a.data.year)
 	.slice(0, 3);
 
@@ -66,11 +66,16 @@ const activeProject = latestLog
 
 			<!-- Featured Publications -->
 			{publications.length > 0 && (
-				<section class="section">
+				<section class="pub-section">
 					<header class="section-header stack gap-2 lg:gap-4">
 						<h3>{t('research.publications')}</h3>
 					</header>
 					<ul class="pub-list">
+						<li class="pub-card pub-card--next">
+							<span class="pub-next-icon">📄</span>
+							<h4 class="pub-title">What's next?</h4>
+							<p class="pub-authors">Work in progress — stay tuned.</p>
+						</li>
 						{publications.map((pub) => (
 							<li class="pub-card">
 								{pub.data.venue ? <div class="pub-venue">{pub.data.venue} · {pub.data.year}</div> : <div class="pub-venue">{pub.data.year}</div>}
@@ -81,6 +86,11 @@ const activeProject = latestLog
 									{pub.data.pdf && (
 										<a href={pub.data.pdf} class="pub-link" target="_blank" rel="noopener noreferrer">
 											<Icon icon="arrow-right" size="0.9em" /> PDF
+										</a>
+									)}
+									{pub.data.poster && (
+										<a href={pub.data.poster} class="pub-link" target="_blank" rel="noopener noreferrer">
+											<Icon icon="arrow-right" size="0.9em" /> Poster
 										</a>
 									)}
 									{pub.data.code && (
@@ -271,6 +281,12 @@ const activeProject = latestLog
 	.section-header h3 { font-size: var(--text-2xl); }
 
 	/* Publications */
+	.pub-section {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+	}
+
 	.pub-list {
 		list-style: none;
 		padding: 0;
@@ -284,6 +300,8 @@ const activeProject = latestLog
 		border: 1px solid var(--gray-800);
 		border-radius: 0.75rem;
 		background: var(--gray-999_40);
+		display: flex;
+		flex-direction: column;
 	}
 
 	.pub-venue {
@@ -315,11 +333,13 @@ const activeProject = latestLog
 		-webkit-box-orient: vertical;
 		overflow: hidden;
 		margin-bottom: 0.75rem;
+		flex: 1;
 	}
 
 	.pub-links {
 		display: flex;
 		gap: 0.75rem;
+		margin-top: auto;
 	}
 
 	.pub-link {
@@ -333,10 +353,33 @@ const activeProject = latestLog
 	}
 	.pub-link:hover { text-decoration: underline; }
 
+	.pub-card--next {
+		border-style: dashed;
+		border-color: var(--gray-700);
+		background: transparent;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		gap: 0.5rem;
+	}
+
+	.pub-next-icon { font-size: 2rem; line-height: 1; }
+
+	.pub-card--next .pub-title {
+		color: var(--gray-400);
+		font-size: var(--text-md);
+	}
+
+	.pub-card--next .pub-authors {
+		margin-bottom: 0;
+		color: var(--gray-600);
+	}
+
 	.cta-row {
 		display: flex;
 		justify-content: flex-end;
-		margin-top: 0.5rem;
 	}
 
 	@media (min-width: 50em) {
@@ -385,7 +428,8 @@ const activeProject = latestLog
 		.gallery { grid-area: gallery; }
 		.cta { grid-area: cta; }
 
-		.pub-card { border-radius: 1.5rem; padding: 2rem; }
+		.pub-list { flex-direction: row; align-items: stretch; }
+		.pub-card { flex: 1; border-radius: 1.5rem; padding: 2rem; }
 		.pub-title { font-size: var(--text-xl); }
 	}
 </style>

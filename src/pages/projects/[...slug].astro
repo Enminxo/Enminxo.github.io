@@ -114,6 +114,7 @@ const projectLogs = allLogs
 
 	.tags {
 		display: flex;
+		flex-wrap: wrap;
 		gap: 0.5rem;
 	}
 
@@ -125,6 +126,8 @@ const projectLogs = allLogs
 	.content {
 		max-width: 65ch;
 		margin-inline: auto;
+		overflow-x: hidden;
+		overflow-wrap: break-word;
 	}
 
 	.content > :global(* + *) { margin-top: 1rem; }

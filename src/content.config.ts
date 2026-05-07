@@ -40,9 +40,11 @@ export const collections = {
 			year: z.number(),
 			abstract: z.string().optional(),
 			pdf: z.string().optional(),
+			poster: z.string().optional(),
 			code: z.string().optional(),
 			project: z.string().optional(),
 			featured: z.boolean().default(false),
+			hidden: z.boolean().default(false),
 		}),
 	}),
 	research: defineCollection({
