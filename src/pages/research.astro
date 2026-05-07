@@ -41,7 +41,7 @@ const publications = (await getCollection('publications')).sort((a, b) => b.data
 						<ul class="pub-list">
 							{publications.filter(p => p.id !== 'example').map((pub) => (
 								<li class="pub-card">
-									<div class="pub-venue">{pub.data.venue} · {pub.data.year}</div>
+									{pub.data.venue ? <div class="pub-venue">{pub.data.venue} · {pub.data.year}</div> : <div class="pub-venue">{pub.data.year}</div>}
 									<h4 class="pub-title">{pub.data.title}</h4>
 									<p class="pub-authors">{pub.data.authors}</p>
 									{pub.data.abstract && <p class="pub-abstract">{pub.data.abstract}</p>}

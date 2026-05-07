@@ -73,7 +73,7 @@ const activeProject = latestLog
 					<ul class="pub-list">
 						{publications.map((pub) => (
 							<li class="pub-card">
-								<div class="pub-venue">{pub.data.venue} · {pub.data.year}</div>
+								{pub.data.venue ? <div class="pub-venue">{pub.data.venue} · {pub.data.year}</div> : <div class="pub-venue">{pub.data.year}</div>}
 								<h4 class="pub-title">{pub.data.title}</h4>
 								<p class="pub-authors">{pub.data.authors}</p>
 								{pub.data.abstract && <p class="pub-abstract">{pub.data.abstract}</p>}
