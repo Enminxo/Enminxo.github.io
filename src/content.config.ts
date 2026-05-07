@@ -28,6 +28,7 @@ export const collections = {
 			img_alt: z.string().optional(),
 			status: z.enum(['idea', 'in progress', 'prototyping', 'completed']).optional(),
 			url: z.string().optional(),
+			hidden: z.boolean().default(false),
 		}),
 	}),
 	publications: defineCollection({

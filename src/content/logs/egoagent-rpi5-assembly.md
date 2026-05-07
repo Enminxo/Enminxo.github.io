@@ -31,21 +31,21 @@ One thing worth noting: the HAT+ 2 ships with its own heatsink (a black finned s
 
 **Step 1 — Active cooler on the Pi first.** Before touching the HAT, mount the active cooler on the Pi 5. The cooler clips onto the SoC and the fan header plugs into the dedicated 4-pin connector near the USB ports. Seat the thermal pad firmly. This step is easier to do without the HAT in the way.
 
-![Raspberry Pi 5 with active cooler installed](/assets/Raspberry/Raspberry/IMG_8298.jpeg)
+<img src="/assets/Raspberry/Raspberry/IMG_8298.jpeg" alt="Raspberry Pi 5 with active cooler installed" style="max-width:50%;display:block;margin:0 auto;" />
 
 **Step 2 — Apply the HAT heatsink.** The included heatsink goes on the back of the HAT board (the side with the Hailo-10H die). Use the included thermal pad. Don't skip this — the Hailo-10H runs warm under sustained inference and the heatsink makes a real difference.
 
 **Step 3 — The PCIe flex cable.** This is the part that catches people off guard. The HAT+ 2 connects to the Pi 5 via two paths: the 40-pin GPIO header (power and signals) and a short PCIe FPC flex cable (the actual data lane to the NPU). The flex cable is the brown ribbon labeled "30mm PCIe" on the HAT board.
 
-![Underside of the AI HAT+ 2, showing the Hailo-10H chip and PCIe flex connector](/assets/Raspberry/Raspberry/IMG_8311.jpeg)
+<img src="/assets/Raspberry/Raspberry/IMG_8311.jpeg" alt="Underside of the AI HAT+ 2, showing the Hailo-10H chip and PCIe flex connector" style="max-width:50%;display:block;margin:0 auto;" />
 
 Route the flex cable before pressing the HAT down: one end into the HAT's FPC connector, the other into the Pi 5's PCIe FPC slot (bottom of the board, near the microSD). Both connectors have a locking latch — lift to open, press down to lock.
 
-![HAT being aligned onto the Pi 5](/assets/Raspberry/Raspberry/IMG_8317.jpeg)
+<img src="/assets/Raspberry/Raspberry/IMG_8317.jpeg" alt="HAT being aligned onto the Pi 5" style="max-width:50%;display:block;margin:0 auto;" />
 
 **Step 4 — Seat and screw.** Align the 40-pin header and lower the HAT onto the Pi. Press down evenly until the GPIO connector is fully seated, then secure the four standoff screws. The HAT should sit flush with no gap.
 
-![Assembled unit — AI HAT+ 2 mounted on Raspberry Pi 5](/assets/Raspberry/Raspberry/IMG_8320.jpeg)
+<img src="/assets/Raspberry/Raspberry/IMG_8320.jpeg" alt="Assembled unit — AI HAT+ 2 mounted on Raspberry Pi 5" style="max-width:50%;display:block;margin:0 auto;" />
 
 **Step 5 — Flash the microSD.** Use Raspberry Pi Imager to write Raspberry Pi OS Bookworm 64-bit. In the advanced settings, enable SSH and set your hostname and credentials before writing — it saves a keyboard/monitor session.
 
@@ -55,7 +55,7 @@ Route the flex cable before pressing the HAT down: one end into the HAT's FPC co
 
 Connect Ethernet, insert the microSD, and power on. If you have a monitor handy for the first boot, connect it via HDMI — things look reassuring on screen for the initial setup wizard.
 
-![First boot — Raspberry Pi OS setup on screen](/assets/Raspberry/Raspberry/IMG_8307.jpeg)
+<img src="/assets/Raspberry/Raspberry/IMG_8307.jpeg" alt="First boot — Raspberry Pi OS setup on screen" style="max-width:50%;display:block;margin:0 auto;" />
 
 Once the wizard is done, update everything before touching the Hailo stack:
 
@@ -194,7 +194,7 @@ hailortcli run /usr/share/hailo-models/resnet_v1_50.hef --measure-fps
 
 For a ResNet-50 at INT8, you should see hundreds of FPS — the 40 TOPS number is real.
 
-![Assembled and powered on — Pi 5 + AI HAT+ 2 running](/assets/Raspberry/Raspberry/IMG_8322.jpeg)
+<img src="/assets/Raspberry/Raspberry/IMG_8322.jpeg" alt="Assembled and powered on — Pi 5 + AI HAT+ 2 running" style="max-width:50%;display:block;margin:0 auto;" />
 
 ---
 

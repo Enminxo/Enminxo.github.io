@@ -9,7 +9,7 @@ tags:
   - VLM
   - Hardware
 status: in progress
-img: /assets/work/egoagent-hero.jpg
+img: /assets/Raspberry/Raspberry/IMG_8320.jpeg
 img_alt: Raspberry Pi 5 with AI HAT 2 attached
 ---
 

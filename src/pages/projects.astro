@@ -10,9 +10,9 @@ import { useTranslations } from '../i18n/translations';
 const lang = 'en';
 const t = useTranslations(lang);
 
-const projects = (await getCollection('work')).sort(
-	(a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
-);
+const projects = (await getCollection('work'))
+	.filter((p) => !p.data.hidden)
+	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 ---
 
 <BaseLayout title="Projects | Enmin Zhong" description={t('projects.subtitle')} lang={lang}>

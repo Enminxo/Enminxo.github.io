@@ -129,11 +129,33 @@ const projectLogs = allLogs
 
 	.content > :global(* + *) { margin-top: 1rem; }
 
-	.content :global(h1),
-	.content :global(h2),
-	.content :global(h3),
-	.content :global(h4),
-	.content :global(h5) { margin: 1.5rem 0; }
+	.content :global(h2) {
+		font-size: var(--text-xl);
+		font-weight: 700;
+		color: var(--gray-100);
+		margin: 2rem 0 0.6rem;
+	}
+
+	.content :global(h3) {
+		font-size: var(--text-lg);
+		font-weight: 600;
+		color: var(--gray-100);
+		margin: 1.75rem 0 0.5rem;
+	}
+
+	.content :global(h4) {
+		font-size: var(--text-md);
+		font-weight: 600;
+		color: var(--gray-200);
+		margin: 1.5rem 0 0.4rem;
+	}
+
+	.content :global(h5) {
+		font-size: var(--text-base);
+		font-weight: 600;
+		color: var(--gray-200);
+		margin: 1.25rem 0 0.4rem;
+	}
 
 	.content :global(img) {
 		border-radius: 1.5rem;

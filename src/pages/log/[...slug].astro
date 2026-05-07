@@ -66,11 +66,19 @@ const dateFormatted = entry.data.date.toLocaleDateString('en-GB', {
 			</header>
 
 			<main class="wrapper">
-				<div class="content">
-					{entry.data.img && (
-						<img src={entry.data.img} alt={entry.data.img_alt || ''} />
-					)}
-					<Content />
+				<div class="article-layout">
+					<div class="content">
+						{entry.data.img && (
+							<img src={entry.data.img} alt={entry.data.img_alt || ''} />
+						)}
+						<Content />
+					</div>
+					<aside class="toc" aria-label="Table of contents">
+						<nav>
+							<p class="toc-title">Contents</p>
+							<ul class="toc-list" id="toc-list"></ul>
+						</nav>
+					</aside>
 				</div>
 
 				<!-- Prev / Next navigation -->
@@ -157,10 +165,23 @@ const dateFormatted = entry.data.date.toLocaleDateString('en-GB', {
 		gap: 0.4rem;
 	}
 
+	/* Article layout: content + TOC sidebar */
+	.article-layout {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 3rem;
+	}
+
 	/* Content */
 	.content {
 		max-width: 65ch;
 		margin-inline: auto;
+		min-width: 0;
+	}
+
+	/* TOC sidebar — hidden on mobile */
+	.toc {
+		display: none;
 	}
 
 	.content > :global(* + *) { margin-top: 1rem; }
@@ -271,7 +292,6 @@ const dateFormatted = entry.data.date.toLocaleDateString('en-GB', {
 	/* Prev/Next nav */
 	.log-nav {
 		max-width: 65ch;
-		margin-inline: auto;
 		margin-top: 4rem;
 		padding-top: 2rem;
 		border-top: 1px solid var(--gray-800);
@@ -319,4 +339,96 @@ const dateFormatted = entry.data.date.toLocaleDateString('en-GB', {
 		.back-link { display: flex; }
 		.entry-title { font-size: var(--text-4xl); }
 	}
+
+	@media (min-width: 75em) {
+		.article-layout {
+			grid-template-columns: 65ch 200px;
+			align-items: start;
+		}
+
+		.content {
+			margin-inline: 0;
+		}
+
+		.toc {
+			display: block;
+			position: sticky;
+			top: 2rem;
+			max-height: calc(100vh - 4rem);
+			overflow-y: auto;
+		}
+
+		.toc-title {
+			font-size: var(--text-sm);
+			font-weight: 700;
+			text-transform: uppercase;
+			letter-spacing: 0.08em;
+			color: var(--gray-400);
+			margin-bottom: 0.75rem;
+		}
+
+		.toc :global(.toc-list) {
+			list-style: none;
+			padding: 0;
+			display: flex;
+			flex-direction: column;
+			gap: 0.35rem;
+		}
+
+		.toc :global(.toc-item a) {
+			font-size: var(--text-sm);
+			color: var(--gray-400);
+			text-decoration: none;
+			line-height: 1.4;
+			display: block;
+			padding: 0.15rem 0;
+			border-left: 2px solid transparent;
+			padding-left: 0.75rem;
+			transition: color 0.15s, border-color 0.15s;
+		}
+
+		.toc :global(.toc-item a:hover),
+		.toc :global(.toc-item a.active) {
+			color: var(--gray-0);
+			border-left-color: var(--accent-regular);
+		}
+
+		.toc :global(.toc-item--sub a) {
+			padding-left: 1.5rem;
+			font-size: 0.8rem;
+		}
+	}
 </style>
+
+<script>
+	const tocList = document.getElementById('toc-list');
+	if (tocList) {
+		const headings = document.querySelectorAll<HTMLElement>('.content h2, .content h3');
+		headings.forEach((heading) => {
+			if (!heading.id) {
+				heading.id = heading.textContent!.trim().toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+			}
+			const li = document.createElement('li');
+			li.className = heading.tagName === 'H3' ? 'toc-item toc-item--sub' : 'toc-item';
+			const a = document.createElement('a');
+			a.href = `#${heading.id}`;
+			a.textContent = heading.textContent;
+			li.appendChild(a);
+			tocList.appendChild(li);
+		});
+
+		// Highlight active section on scroll
+		const links = tocList.querySelectorAll<HTMLAnchorElement>('a');
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					const id = entry.target.id;
+					const link = tocList.querySelector<HTMLAnchorElement>(`a[href="#${id}"]`);
+					if (link) link.classList.toggle('active', entry.isIntersecting);
+				});
+			},
+			{ rootMargin: '0px 0px -70% 0px', threshold: 0 }
+		);
+		headings.forEach((h) => observer.observe(h));
+	}
+</script>
