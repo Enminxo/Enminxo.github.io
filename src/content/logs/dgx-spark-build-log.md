@@ -4,6 +4,8 @@ title: "Server Setup: DGX Spark for Local Fine-Tuning"
 date: 2026-04-30
 summary: "Unboxing and onboarding the DGX Spark — the local compute backbone for fine-tuning vision-language models for EgoAgent."
 tags: ["DGX Spark", "Fine-Tuning", "NVIDIA", "Setup"]
+img: /assets/DGX_SPARK.jpeg
+img_alt: "NVIDIA DGX Spark unit"
 ---
 
 ## Why Local Compute
