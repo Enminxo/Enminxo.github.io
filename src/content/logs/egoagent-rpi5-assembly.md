@@ -21,7 +21,7 @@ This entry covers the hardware assembly and getting the NPU driver running. It t
 - Raspberry Pi Active Cooler — mandatory once the NPU is under load
 - USB-C PSU 5V/5A — the official Pi 5 supply or equivalent; anything less causes throttling
 - microSD card A2 class, 64 GB or more — you can't use NVMe here, the PCIe slot is taken by the HAT
-- Ethernet cable — useful for initial setup before you have SSH over Tailscale
+- WiFi access — used for initial setup before SSH over Tailscale (no Ethernet cable needed)
 
 One thing worth noting: the HAT+ 2 ships with its own heatsink (a black finned strip) for the Hailo-10H chip. It's in the box — don't discard it thinking it's packaging.
 
@@ -53,7 +53,7 @@ Route the flex cable before pressing the HAT down: one end into the HAT's FPC co
 
 ### First boot and OS setup
 
-Connect Ethernet, insert the microSD, and power on. If you have a monitor handy for the first boot, connect it via HDMI — things look reassuring on screen for the initial setup wizard.
+Insert the microSD and power on. WiFi can be configured two ways: via Raspberry Pi Imager's advanced settings before flashing, or directly through the setup wizard if you have a monitor connected over HDMI.
 
 <img src="/assets/Raspberry/Raspberry/IMG_8307.jpeg" alt="First boot — Raspberry Pi OS setup on screen" style="max-width:50%;display:block;margin:0 auto;" />
 

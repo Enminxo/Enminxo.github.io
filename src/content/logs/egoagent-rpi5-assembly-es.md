@@ -23,7 +23,7 @@ Esta entrada cubre el montaje del hardware y la puesta en marcha del driver del 
 - Raspberry Pi Active Cooler — obligatorio cuando el NPU está bajo carga
 - Fuente USB-C 5V/5A — la oficial de la Pi 5 o equivalente; con menos amperios aparece throttling
 - Tarjeta microSD clase A2, 64 GB o más — no puedes usar NVMe aquí, el slot PCIe lo ocupa el HAT
-- Cable Ethernet — útil para el setup inicial antes de tener SSH por Tailscale
+- Acceso WiFi — usado para el setup inicial antes de tener SSH por Tailscale (no se necesitó cable Ethernet)
 
 Un detalle importante: el HAT+ 2 viene con su propio disipador (una tira negra con aletas) para el chip Hailo-10H. Está dentro de la caja — no lo tires pensando que es embalaje.
 
@@ -55,7 +55,7 @@ Conecta el cable flex antes de bajar el HAT: un extremo al conector FPC del HAT,
 
 ### Primer arranque y configuración del OS
 
-Conecta el Ethernet, inserta la microSD y enciende. Si tienes un monitor a mano para el primer arranque, conéctalo por HDMI — ver el asistente de configuración en pantalla da confianza.
+Inserta la microSD y enciende. La conexión WiFi la puedes configurar de dos formas: en el paso anterior con Raspberry Pi Imager (antes de grabar), o directamente en el asistente de configuración si tienes un monitor conectado por HDMI.
 
 ![Primer arranque — asistente de configuración de Raspberry Pi OS](/assets/Raspberry/Raspberry/IMG_8307.jpeg)
 
