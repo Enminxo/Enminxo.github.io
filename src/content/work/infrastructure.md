@@ -8,6 +8,8 @@ tags:
   - Tailscale
   - DevOps
 status: in progress
+img: /assets/DGX_SPARK_cropped.jpeg
+img_alt: "NVIDIA DGX Spark — local AI compute unit"
 ---
 
 Setup notes and build logs for the local infrastructure layer: compute servers, networking, and development environment — the backbone that the rest of the projects run on.
