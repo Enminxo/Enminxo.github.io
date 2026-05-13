@@ -31,6 +31,23 @@ const activeProject = latestLog
 ---
 
 <BaseLayout lang={lang}>
+	<script type="application/ld+json" set:html={JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "Person",
+		"name": "Enmin Zhong",
+		"jobTitle": "Computer Vision Researcher",
+		"affiliation": {
+			"@type": "Organization",
+			"name": "GTI-UPM"
+		},
+		"email": "enminzhong@gmail.com",
+		"url": "https://enminxo.github.io",
+		"sameAs": [
+			"https://github.com/enminxo",
+			"https://www.researchgate.net/profile/Enmin-Zhong"
+		],
+		"knowsAbout": ["Computer Vision", "Egocentric Video Understanding", "Vision-Language Models", "Embedded AI"]
+	})} />
 	<div class="stack gap-20 lg:gap-40">
 		<div class="wrapper">
 			<ProfileHero lang={lang} />

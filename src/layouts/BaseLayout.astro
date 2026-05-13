@@ -19,6 +19,14 @@ const { title, description, lang = 'en' } = Astro.props;
 <html lang={lang}>
 	<head>
 		<MainHead title={title} description={description} />
+		<!-- Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V00HGSNEXL"></script>
+		<script is:inline>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() { dataLayer.push(arguments); }
+			gtag('js', new Date());
+			gtag('config', 'G-V00HGSNEXL');
+		</script>
 	</head>
 	<body>
 		<div class="stack backgrounds">

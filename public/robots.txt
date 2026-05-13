@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://enminxo.github.io/sitemap-index.xml

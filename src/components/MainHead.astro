@@ -10,16 +10,33 @@ const {
 	title = 'Enmin Zhong — Researcher & Builder',
 	description = 'Computer Vision Researcher at GTI-UPM. Egocentric video, VLM optimization, and side projects.',
 } = Astro.props;
+
+const canonicalUrl = Astro.url.href;
+const siteUrl = Astro.site?.href ?? 'https://enminxo.github.io';
 ---
 
 <meta charset="UTF-8" />
-<meta name="description" property="og:description" content={description} />
+<meta name="description" content={description} />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="generator" content={Astro.generator} />
 <title>{title}</title>
 
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="icon" href="/favicon.ico" />
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- Open Graph -->
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Enmin Zhong" />
+<meta property="og:locale" content="en_US" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+
+<link rel="icon" type="image/png" href="/favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
