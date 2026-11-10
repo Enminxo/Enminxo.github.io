@@ -26,7 +26,7 @@ These works report what a paper usually reports: an accuracy on a benchmark (for
 
 <a href="/assets/logs/ego-memory-assistant/system.jpg"><img src="/assets/logs/ego-memory-assistant/system.jpg" alt="Three layers: the Neon glasses and their phone; the describer and the diary on a DGX Spark; the reader that answers with the moment. Each arrow is labeled with what crosses it." style="width:100%;display:block;margin:0 auto;" /></a>
 
-The glasses' scene camera is wired to its phone. A small relay on the phone keeps 8 photos of every 15 seconds and sends only those to a DGX Spark on my desk. There, Gemma 4 31B writes one line in the first person for each 15-second window: *"In the kitchen, I stirred scrambled eggs in a pan on the stove."* The diary is text only. When a question comes in, the same model, now as a reader, sees only the diary, never the video, and answers citing the line it relied on, so the moment can be checked.
+The glasses' scene camera is wired to its phone. A small relay on the phone keeps 8 photos of every 15 seconds and sends only those to a DGX Spark on my desk. There, Gemma 4 31B writes one line in the first person for each 15-second window: *"In the kitchen, I stirred scrambled eggs in a pan on the stove."* Only the scene camera is used: Neon also records where I look and what I hear, but the prototype does not use either yet. The diary is text only. When a question comes in, the same model, now as a reader, sees only the diary, never the video, and answers citing the line it relied on, so the moment can be checked.
 
 To measure it I used the same test as Lando et al. [4]: the 500 four-option questions of QAEgo4D-Closed [6, 7], over 148 eight-minute Ego4D clips [8]. To the usual score I added three things: a reader that gets no diary at all, a diary written from Ego4D's human narrations instead of a model, and, for each describer, 50 doubtful diary mentions checked by eye against the frames.
 
@@ -98,7 +98,7 @@ Lando et al. measured time per clip on desktop GPUs [4], and VisualClaw [9] lowe
 
 ### What I take from it
 
-The recipe works: a text diary of a few hundred bytes per minute adds 22 points. But one score mixes very different things: questions that need no memory, lines the describer invents or negates, and moments that fall between two frames. Pulled apart, they point to different fixes. The describer's habits, like echoing its prompt or writing what did not happen, are cheap to see and partly cheap to fix. What falls between frames, and the time it takes to write the diary live, are the hard part, and that is where I am working next.
+The recipe works: a text diary of a few hundred bytes per minute adds 22 points. But one score mixes very different things: questions that need no memory, lines the describer invents or negates, and moments that fall between two frames. Pulled apart, they point to different fixes. The describer's habits, like echoing its prompt or writing what did not happen, are cheap to see and partly cheap to fix. What falls between frames, and the time it takes to write the diary live, are the hard part, and that is where I am working next. Neon's gaze is an obvious lead there: where I look could choose which frames get described and which objects get named, the two places where the describer fails today. That is an idea, not a result yet.
 
 <!-- TODO before publishing: the repository github.com/Enminxo/ego-memory-assistant is private. Make it public and add a short "Code" section here, or leave it out. -->
 
