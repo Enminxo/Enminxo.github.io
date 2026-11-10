@@ -14,12 +14,7 @@ This post is about an assistant that tries to answer, running on Pupil Labs Neon
 
 ### TL;DR
 
-- **What it is.** A memory assistant on Pupil Labs Neon glasses: a vision-language model writes one diary line every 15 seconds, and a language model answers questions from the diary alone. The recipe is not new; taking its score apart is.
-- **The diary helps.** On 500 four-option questions, the reader gets 53.4% with the diary and 31.2% without it: 22 points more. A reader with no memory already beats guessing (25%), so that is the baseline to beat.
-- **A better describer has little room left.** A diary written from Ego4D's human narrations gets only about 5 points more, and it still leaves 4 questions in 10 wrong.
-- **The false lines follow patterns.** The small model writes its own prompt back (keys in a third of the windows), and both models write down things that did not happen ("no medication was taken") from 8 frames.
-- **A right answer is not always a memory.** A cup that no diary saw still gets the right answer, because the diary talks about wood and the reader picks the option that fits.
-- **Storing is cheap, writing is not.** The diary takes 0.67 kB per minute, over 20,000 times less than the video. But the good describer needs 9.6 s per 15-second window, and 29 s live at full size, so 20 of 46 windows were lost.
+I built an assistant on Pupil Labs Neon glasses that turns what the camera sees into a short written diary, so that later you can ask it things like "Did I take my pill?". Tested on 500 multiple-choice questions about first-person videos, the diary clearly helps (53% right instead of 31%), but it also writes down things that never happened, and some of its right answers are good guesses rather than memories. Storing the diary costs almost nothing, under 1 kB per minute, but writing it does: on my glasses the good model needs about 29 seconds for every 15 seconds of life, so it falls behind.
 
 ---
 
@@ -31,13 +26,34 @@ The closest system on real glasses is VisionClaw [5]: Meta Ray-Ban glasses strea
 
 These works report what a paper usually reports: an accuracy on a benchmark (for the memory ones, four or five answer options per question) and, in some, a cost. Lando et al. measure their memory at about 3.6 kB per minute [3] and the time per clip on consumer GPUs [4]. What none of the memory works puts numbers on is where the errors come from: how many questions a reader gets right with no memory at all, how much better a perfect describer would do, and what kind of false sentences end up in the diary. That is what this post is about.
 
-### The system, and how I tested it
+### The system
 
 <a href="/assets/logs/ego-memory-assistant/system.jpg"><img src="/assets/logs/ego-memory-assistant/system.jpg" alt="Three layers: the Neon glasses and their phone; the describer and the diary on a DGX Spark; the reader that answers with the moment. Each arrow is labeled with what crosses it." style="width:100%;display:block;margin:0 auto;" /></a>
 
 The glasses' scene camera is wired to its phone. A small relay on the phone keeps 8 photos of every 15 seconds and sends only those to a DGX Spark on my desk. There, Gemma 4 31B writes one line in the first person for each 15-second window: *"In the kitchen, I stirred scrambled eggs in a pan on the stove."* Only the scene camera is used: Neon also records where I look and what I hear, but the prototype does not use either yet. The diary is text only. When a question comes in, the same model, now as a reader, sees only the diary, never the video, and answers citing the line it relied on, so the moment can be checked.
 
-To measure it I used the same test as Lando et al. [4]: the 500 four-option questions of QAEgo4D-Closed [6, 7], over 148 eight-minute Ego4D clips [8]. To the usual score I added three things: a reader that gets no diary at all, a diary written from Ego4D's human narrations instead of a model, and, for each describer, 50 doubtful diary mentions checked one by one against their frames.
+
+### On my own glasses: the window I closed
+
+Benchmarks use other people's videos. The point of the glasses is to run this on mine, so here is one short recording, from start to finish. I wear the Neon glasses, wired to their phone, record with the Companion app, and upload the recording to the demo page. The diary is written as the video is read, and questions can be asked at any moment. (It also runs live, through the relay on the phone; that part is mostly about cost, so it comes later.)
+
+In the recording I walk to the office window, push it shut, and go through two doors. This is the moment the window closes:
+
+<video poster="/assets/logs/ego-memory-assistant/window-close-poster.jpg" autoplay muted loop playsinline style="width:100%;display:block;margin:0 auto;border-radius:12px;" aria-label="Seen through the glasses: my hand pushes the sliding office window shut"><source src="/assets/logs/ego-memory-assistant/window-close.mp4" type="video/mp4"><source src="/assets/logs/ego-memory-assistant/window-close.webm" type="video/webm"></video>
+
+The describer never sees this video. It gets 8 photos of every 15 seconds, and only the last two catch my hand on the glass:
+
+<a href="/assets/logs/ego-memory-assistant/window-frames.jpg"><img src="/assets/logs/ego-memory-assistant/window-frames.jpg" alt="The 8 photos of the first 15 seconds, the two diary lines written for them in two runs, and which questions the reader can answer" style="width:100%;display:block;margin:0 auto;" /></a>
+
+So the diary says I touched the window, and in one of two runs that the window "remained closed". The reader answers "What did I do at the window?" well, and cites the moment, so I can jump to it in the video. It cannot answer "Did I close the window?", because nothing in the diary says so.
+
+<a href="/assets/logs/ego-memory-assistant/app.jpg"><img src="/assets/logs/ego-memory-assistant/app.jpg" alt="The demo page: the video, the diary written so far, the photos behind each line, and an answer with its moment" style="width:100%;display:block;margin:0 auto;" /></a>
+
+Two more things showed up in this one minute of my own day. The last line of one diary says *"I did not pick up or put down any personal objects, take any medication or food, or operate any appliances or doors"*, right after a line where I open a door. That line covers only the last 6.5 seconds, where it is true, but a reader asked "Did I open a door?" sees both. And in quick tests on this one video, Gemma 4 31B never wrote that I closed the window in any setting I tried, while Qwen 3.8 (27B) did in 8 of 12 tries, but only with 5-second clips around the gesture, not with the app's 15-second ones. That is a lead, not a result: shorter clips, a prompt that asks about states, or a second look when something changes are the next things to try.
+
+### How I tested it
+
+To measure it I used QAEgo4D [6], a set of multiple-choice questions about first-person videos: for example, "Where was the red cup before walking towards the tractor?", with four possible answers. The videos come from Ego4D [8], thousands of hours filmed by people wearing head cameras in their daily lives. I used the same 500 four-option questions as Lando et al. [4] (the version called QAEgo4D-Closed [7]), over 148 clips of about 8 minutes. To the usual score I added three things: a reader that gets no diary at all, a diary written from Ego4D's human narrations instead of a model, and, for each describer, 50 doubtful diary mentions checked one by one against their frames.
 
 ### A blind reader already gets 31%
 
@@ -81,9 +97,7 @@ Eight frames in 15 seconds is one every 1.9 seconds, and anything shorter can fa
 
 Yet all three diaries get the question right ("on the wood"), while the blind reader picks "on the metal". The diaries say again and again that the person handled wood, and the reader picks the option that fits. The answer is right, but nothing remembered the cup. A four-option score counts it as memory all the same.
 
-<a href="/assets/logs/ego-memory-assistant/app.jpg"><img src="/assets/logs/ego-memory-assistant/app.jpg" alt="The demo page: the hand pushes the window shut while the diary says the window remained closed" style="width:100%;display:block;margin:0 auto;" /></a>
-
-On my own recording with the Neon glasses the failure is a related one. The frames show my hand pushing the office window shut, and the diary says the window "remained closed". The reader answers "Did I close the window?" from that line, and gets it wrong. A change of state is easy to miss in a few still photos.
+The window on my own glasses, earlier in this post, is the same problem from the other side: there the photos caught the moment, but not the change.
 
 ### What it costs: storing the diary is almost free, writing it is not
 
