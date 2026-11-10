@@ -12,6 +12,15 @@ img_alt: "What the glasses saw: my hand pushing the office window shut"
 
 This post is about an assistant that tries to answer, running on Pupil Labs Neon glasses. The way it works is not mine, and I say so first. What I add is a closer look at it: where its mistakes come from, and what it costs to run.
 
+### TL;DR
+
+- **What it is.** A memory assistant on Pupil Labs Neon glasses: a vision-language model writes one diary line every 15 seconds, and a language model answers questions from the diary alone. The recipe is not new; taking its score apart is.
+- **The diary helps.** On 500 four-option questions, the reader gets 53.4% with the diary and 31.2% without it: 22 points more. A reader with no memory already beats guessing (25%), so that is the baseline to beat.
+- **A better describer has little room left.** A diary written from Ego4D's human narrations gets only about 5 points more, and it still leaves 4 questions in 10 wrong.
+- **The false lines follow patterns.** The small model writes its own prompt back (keys in a third of the windows), and both models write down things that did not happen ("no medication was taken") from 8 frames.
+- **A right answer is not always a memory.** A cup that no diary saw still gets the right answer, because the diary talks about wood and the reader picks the option that fits.
+- **Storing is cheap, writing is not.** The diary takes 0.67 kB per minute, over 20,000 times less than the video. But the good describer needs 9.6 s per 15-second window, and 29 s live at full size, so 20 of 46 windows were lost.
+
 ---
 
 ### What is not new
