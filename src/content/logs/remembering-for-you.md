@@ -18,7 +18,7 @@ This post is about an assistant that tries to answer, running on Pupil Labs Neon
 
 The recipe is "describe, then read". A vision-language model watches the video in short pieces and writes down what happens; later, a language model reads that text to answer questions. LLoVi [1] and LifelongMemory [2] showed in 2023 that this simple recipe works on long videos. Lando, Forte, Farinella and Furnari [3, 4] turned it into an *online* episodic memory: the text is written as the video arrives, one piece every 15 or 30 seconds, and kept as a small diary. My prototype follows their design and their prompts.
 
-The closest system on real glasses is VisionClaw [5]: Meta Ray-Ban glasses stream to a phone, Gemini Live answers, and an agent carries out tasks for the user. Its users also ask about the past ("What did I do yesterday?"), but it keeps no running diary of what the camera sees (the paper describes saving things on request and logging interactions), and how well it recalls is not measured.
+The closest system on real glasses is VisionClaw [5]: Meta Ray-Ban glasses stream to a phone, Gemini Live answers, and an agent carries out tasks for the user. Its users also ask about the past ("What did I do yesterday?"): recall is 12% of their requests. But the paper does not describe a running diary of what the camera sees (recall draws on saved items and logged interactions), and it does not measure how often recall is right.
 
 These works report what a paper usually reports: an accuracy on a benchmark (for the memory ones, four or five answer options per question) and, in some, a cost. Lando et al. measure their memory at about 3.6 kB per minute [3] and the time per clip on consumer GPUs [4]. What none of the memory works puts numbers on is where the errors come from: how many questions a reader gets right with no memory at all, how much better a perfect describer would do, and what kind of false sentences end up in the diary. That is what this post is about.
 
@@ -28,7 +28,7 @@ These works report what a paper usually reports: an accuracy on a benchmark (for
 
 The glasses' scene camera is wired to its phone. A small relay on the phone keeps 8 photos of every 15 seconds and sends only those to a DGX Spark on my desk. There, Gemma 4 31B writes one line in the first person for each 15-second window: *"In the kitchen, I stirred scrambled eggs in a pan on the stove."* Only the scene camera is used: Neon also records where I look and what I hear, but the prototype does not use either yet. The diary is text only. When a question comes in, the same model, now as a reader, sees only the diary, never the video, and answers citing the line it relied on, so the moment can be checked.
 
-To measure it I used the same test as Lando et al. [4]: the 500 four-option questions of QAEgo4D-Closed [6, 7], over 148 eight-minute Ego4D clips [8]. To the usual score I added three things: a reader that gets no diary at all, a diary written from Ego4D's human narrations instead of a model, and, for each describer, 50 doubtful diary mentions checked by eye against the frames.
+To measure it I used the same test as Lando et al. [4]: the 500 four-option questions of QAEgo4D-Closed [6, 7], over 148 eight-minute Ego4D clips [8]. To the usual score I added three things: a reader that gets no diary at all, a diary written from Ego4D's human narrations instead of a model, and, for each describer, 50 doubtful diary mentions checked one by one against their frames.
 
 ### A blind reader already gets 31%
 
@@ -52,7 +52,7 @@ An average hides which questions move. Question by question, the diary turns 150
 
 <a href="/assets/logs/ego-memory-assistant/echo.jpg"><img src="/assets/logs/ego-memory-assistant/echo.jpg" alt="The prompt lists keys, wallet, phone, glasses and bags as examples; the small model writes about picking up keys in a third of all windows" style="width:100%;display:block;margin:0 auto;" /></a>
 
-"Fewer points" is not a diagnosis yet. Reading the lines that no narration supports, the small model's most common invention turns out to be its own prompt, read back. The prompt asks the describer to prioritise personal objects "(keys, wallet, phone, glasses, bags)". The small model writes *"I picked up my keys and placed them on the counter near the sink."* word for word 63 times, in 27 of the 148 clips, and names keys in a third of all windows (32.6%). Checked by eye on the frames, 20 of its 50 doubtful mentions were invented; the large model invented none of its 50.
+"Fewer points" is not a diagnosis yet. Reading the lines that no narration supports, the small model's most common invention turns out to be its own prompt, read back. The prompt asks the describer to prioritise personal objects "(keys, wallet, phone, glasses, bags)". The small model writes *"I picked up my keys and placed them on the counter near the sink."* word for word 63 times, in 27 of the 148 clips, and names keys in a third of all windows (32.6%). Checked one by one on the frames, 20 of its 50 doubtful mentions were invented; the large model invented none of its 50.
 
 Taking the examples out of the prompt drops keys to 0.1% of the windows and invented objects to 0 of 50. It is a cheap fix, but it does not close the gap: the small model still trails the large one by 7.4 points [3.5, 11.4], and it still names far fewer of the objects the person actually handles.
 
@@ -93,7 +93,7 @@ Lando et al. measured time per clip on desktop GPUs [4], and VisualClaw [9] lowe
 - Each diary was written once. Its numbers held with a second option order and with a reader from another family (Qwen), but I did not write each diary several times.
 - The test still has four options. This post explains a score; it does not replace it with open-ended answers.
 - The human diary is a soft ceiling, because narrations describe actions and skip many objects.
-- The checks by eye are 50 mentions per describer, judged by one person (me) on small frames.
+- The checks on the frames are 50 mentions per describer, judged by a single rater on small frames (160×120), and that rater was an AI model (Claude), not a person.
 - The live numbers come from short sessions, by one person, in one office.
 
 ### What I take from it
