@@ -1,6 +1,7 @@
 ---
 project: ego-memory-assistant
 title: "Remembering for You: Lessons from Building an Episodic Memory Assistant on Smart Glasses"
+subtitle: "A case study of online episodic memory in the wild, and where it breaks"
 date: 2026-11-10
 summary: "A describe-then-read memory, taken apart: where its errors come from on 500 questions, and what it costs to run live on Pupil Labs Neon glasses."
 tags: ["Egocentric AI", "VLM", "Pupil Labs Neon", "Episodic Memory", "Failure Analysis"]
