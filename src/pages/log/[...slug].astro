@@ -145,12 +145,12 @@ const dateFormatted = entry.data.date.toLocaleDateString('en-GB', {
 		color: var(--gray-400);
 	}
 
+	/* The title spans the reading column, like the text below it */
 	.entry-title {
-		font-size: var(--text-3xl);
+		font-size: var(--text-2xl);
 		color: var(--gray-0);
 		font-weight: 700;
 		line-height: 1.15;
-		max-width: 20ch;
 	}
 
 	.entry-tags {
@@ -361,7 +361,7 @@ const dateFormatted = entry.data.date.toLocaleDateString('en-GB', {
 
 	@media (min-width: 50em) {
 		.back-link { display: flex; }
-		.entry-title { font-size: var(--text-4xl); }
+		.entry-title { font-size: var(--text-3xl); }
 	}
 
 	@media (min-width: 50em) {
