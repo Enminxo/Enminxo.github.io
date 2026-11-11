@@ -1,5 +1,7 @@
 ---
+import { getCollection } from 'astro:content';
 import ContactCTA from '../components/ContactCTA.astro';
+import EntryList from '../components/EntryList.astro';
 import Hero from '../components/Hero.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { useTranslations } from '../i18n/translations';
@@ -7,6 +9,13 @@ import { useTranslations } from '../i18n/translations';
 const lang = 'en';
 const t = useTranslations(lang);
 const lastUpdated = 'May 2026';
+
+// The newest entries first: each one links straight to its post.
+const latestEntries = (await getCollection('logs'))
+	.filter((log) => log.data.lang === 'en')
+	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+	.slice(0, 5);
+const projects = await getCollection('work');
 ---
 
 <BaseLayout title="Now | Enmin Zhong" description={t('now.intro')} lang={lang}>
@@ -14,7 +23,15 @@ const lastUpdated = 'May 2026';
 		<main class="wrapper stack gap-8">
 			<Hero title={t('now.title')} tagline={t('now.intro')} align="start" />
 
+			{latestEntries.length > 0 && (
+				<section class="content latest">
+					<h2 class="section-label">{t('now.latest')}</h2>
+					<EntryList entries={latestEntries} projects={projects} />
+				</section>
+			)}
+
 			<div class="content">
+				<h2 class="section-label">{t('now.focus')}</h2>
 				<p class="updated">{t('now.updated')}: {lastUpdated}</p>
 
 				<ul>
@@ -37,6 +54,19 @@ const lastUpdated = 'May 2026';
 <style>
 	.content {
 		max-width: 65ch;
+	}
+
+	.latest {
+		margin-bottom: 2rem;
+	}
+
+	.section-label {
+		font-size: var(--text-sm);
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--accent-regular);
+		margin-bottom: 1rem;
 	}
 
 	.updated {

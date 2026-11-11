@@ -6,7 +6,6 @@ const t = {
 		// Nav
 		'nav.home': 'Home',
 		'nav.projects': 'Projects',
-		'nav.writing': 'Writing',
 		'nav.research': 'Research',
 		'nav.now': 'Now',
 		'nav.contact': 'Contact',
@@ -53,16 +52,12 @@ const t = {
 		'building.latest': 'Latest update',
 		'building.follow': 'Read the entry',
 
-		// Writing
-		'writing.title': 'Writing',
-		'writing.subtitle': 'Everything I have written here, newest first.',
-		'writing.more': 'More entries',
-		'writing.all': 'All entries',
-
 		// Now page
 		'now.title': 'Now',
 		'now.intro': 'What I\'m focused on this month.',
 		'now.updated': 'Last updated',
+		'now.latest': 'Latest entries',
+		'now.focus': 'What I am focused on',
 
 		// Log entries
 		'log.en_only': 'This entry is written in English.',
@@ -85,7 +80,6 @@ const t = {
 		// Nav
 		'nav.home': 'Inicio',
 		'nav.projects': 'Proyectos',
-		'nav.writing': 'Escritos',
 		'nav.research': 'Investigación',
 		'nav.now': 'Ahora',
 		'nav.contact': 'Contacto',
@@ -132,16 +126,12 @@ const t = {
 		'building.latest': 'Última actualización',
 		'building.follow': 'Leer la entrada',
 
-		// Writing
-		'writing.title': 'Escritos',
-		'writing.subtitle': 'Todo lo que he escrito aquí, lo más reciente primero.',
-		'writing.more': 'Más entradas',
-		'writing.all': 'Todas las entradas',
-
 		// Now page
 		'now.title': 'Ahora',
 		'now.intro': 'En qué estoy centrado este mes.',
 		'now.updated': 'Actualizado',
+		'now.latest': 'Últimas entradas',
+		'now.focus': 'En qué estoy centrado',
 
 		// Log entries
 		'log.en_only': 'Esta entrada está escrita en inglés.',
