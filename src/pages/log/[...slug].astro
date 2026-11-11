@@ -56,7 +56,6 @@ const dateFormatted = entry.data.date.toLocaleDateString('en-GB', {
 						<time class="entry-date" datetime={entry.data.date.toISOString()}>{dateFormatted}</time>
 					</div>
 					<h1 class="entry-title">{entry.data.title}</h1>
-					<p class="entry-summary">{entry.data.summary}</p>
 					{entry.data.tags && (
 						<div class="entry-tags">
 							{entry.data.tags.map((tag) => <Pill>{tag}</Pill>)}
@@ -152,13 +151,6 @@ const dateFormatted = entry.data.date.toLocaleDateString('en-GB', {
 		font-weight: 700;
 		line-height: 1.15;
 		max-width: 20ch;
-	}
-
-	.entry-summary {
-		font-size: var(--text-md);
-		color: var(--gray-300);
-		max-width: 55ch;
-		line-height: 1.6;
 	}
 
 	.entry-tags {
