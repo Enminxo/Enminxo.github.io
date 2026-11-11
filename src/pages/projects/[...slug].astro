@@ -79,9 +79,11 @@ const projectLogs = allLogs
 					</div>
 				)}
 
-				<div class:list={['content', { 'after-entries': projectLogs.length > 0 }]}>
-					<Content />
-				</div>
+				{projectLogs.length === 0 && (
+					<div class="content">
+						<Content />
+					</div>
+				)}
 			</main>
 		</div>
 		<ContactCTA lang={lang} />
@@ -183,13 +185,6 @@ const projectLogs = allLogs
 	.build-log {
 		max-width: 65ch;
 		margin-inline: auto;
-	}
-
-	/* The project's longer text, below its entries */
-	.after-entries {
-		margin-top: 3rem;
-		padding-top: 2.5rem;
-		border-top: 1px solid var(--gray-800);
 	}
 
 	.log-list {
