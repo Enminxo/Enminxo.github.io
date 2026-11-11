@@ -3,7 +3,7 @@ project: ego-memory-assistant
 title: "Remembering for You: Lessons from Building an Episodic Memory Assistant on Smart Glasses"
 subtitle: "Part 1: a diary written by my glasses, and what it costs live"
 date: 2026-11-10
-summary: "A memory assistant on Pupil Labs Neon glasses writes one line of diary every 15 seconds and answers questions from it. One real minute of my day, and what it costs to run live."
+summary: "Part 1: a diary written by my glasses, and what it costs live."
 tags: ["Egocentric AI", "VLM", "Pupil Labs Neon", "Episodic Memory"]
 img: /assets/logs/ego-memory-assistant/cover.jpg
 img_alt: "What the glasses saw: my hand pushing the office window shut"

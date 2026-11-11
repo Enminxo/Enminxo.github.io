@@ -3,7 +3,7 @@ project: ego-memory-assistant
 title: "Remembering for You: Lessons from Building an Episodic Memory Assistant on Smart Glasses"
 subtitle: "Part 2: where the diary goes wrong, on 500 questions"
 date: 2026-11-11
-summary: "On 500 questions, a diary written by a vision-language model adds 22 points over a reader with no memory. Where the remaining errors come from: a prompt read back, lines about what did not happen, and moments that fall between two photos."
+summary: "Part 2: where the diary goes wrong, on 500 questions."
 tags: ["Egocentric AI", "VLM", "Episodic Memory", "Failure Analysis"]
 ---
 
