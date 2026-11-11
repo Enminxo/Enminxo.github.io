@@ -1,9 +1,9 @@
 ---
 project: ego-memory-assistant
 title: "Remembering for You: Lessons from Building an Episodic Memory Assistant on Smart Glasses"
-subtitle: "Part 1: a diary written by my glasses, and what it costs live"
+subtitle: "Part 1: how it works on my glasses, and what it costs"
 date: 2026-11-10
-summary: "Part 1: a diary written by my glasses, and what it costs live."
+summary: "Part 1: how it works on my glasses, and what it costs."
 tags: ["Egocentric AI", "VLM", "Pupil Labs Neon", "Episodic Memory"]
 img: /assets/logs/ego-memory-assistant/cover.jpg
 img_alt: "What the glasses saw: my hand pushing the office window shut"

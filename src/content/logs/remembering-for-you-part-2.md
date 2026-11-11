@@ -1,9 +1,9 @@
 ---
 project: ego-memory-assistant
 title: "Remembering for You: Lessons from Building an Episodic Memory Assistant on Smart Glasses"
-subtitle: "Part 2: where the diary goes wrong, on 500 questions"
+subtitle: "Part 2: where it goes wrong, and why"
 date: 2026-11-11
-summary: "Part 2: where the diary goes wrong, on 500 questions."
+summary: "Part 2: where it goes wrong, and why."
 tags: ["Egocentric AI", "VLM", "Episodic Memory", "Failure Analysis"]
 ---
 
