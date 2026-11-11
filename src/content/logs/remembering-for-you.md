@@ -51,8 +51,6 @@ So the diary says I touched the window, and in one of two runs that the window "
 
 <a href="/assets/logs/ego-memory-assistant/app.jpg"><img src="/assets/logs/ego-memory-assistant/app.jpg" alt="The demo page: the video, the diary written so far, the photos behind each line, and an answer with its moment" style="width:100%;display:block;margin:0 auto;" /></a>
 
-Two more things showed up in this one minute of my own day. The last line of one diary says *"I did not pick up or put down any personal objects, take any medication or food, or operate any appliances or doors"*, right after a line where I open a door. That line covers only the last 6.5 seconds, where it is true, but a reader asked "Did I open a door?" sees both. And in quick tests on this one video, Gemma 4 31B never wrote that I closed the window in any setting I tried, while Qwen 3.8 (27B) did in 8 of 12 tries, but only with 5-second clips around the gesture, not with the app's 15-second ones. That is a lead, not a result: shorter clips, a prompt that asks about states, or a second look when something changes are the next things to try.
-
 ### What it costs: storing the diary is almost free, writing it is not
 
 <a href="/assets/logs/ego-memory-assistant/cost.jpg"><img src="/assets/logs/ego-memory-assistant/cost.jpg" alt="Accuracy against seconds to write one 15-second window, with the 15-second live limit; the diary takes 0.67 kB per minute against 15.3 MB per minute of video" style="width:100%;display:block;margin:0 auto;" /></a>
