@@ -23,20 +23,19 @@ This post is about a prototype that tries to do that. I tested it first on a sma
 
 ---
 
-### What is not new
-
-The recipe is "describe, then read". A vision-language model watches the video in short pieces and writes down what happens; later, a language model reads that text to answer questions. LLoVi [1] and LifelongMemory [2] showed in 2023 that this simple recipe works on long videos. Lando, Forte, Farinella and Furnari [3, 4] turned it into an *online* episodic memory: the text is written as the video arrives, one piece every 15 or 30 seconds, and kept as a small diary. My prototype follows their design and their prompts.
-
-The closest system on real glasses is VisionClaw [5]: Meta Ray-Ban glasses stream to a phone, Gemini Live answers, and an agent carries out tasks for the user. Its users also ask about the past ("What did I do yesterday?"): recall is 12% of their requests. But the paper does not describe a running diary of what the camera sees (recall draws on saved items and logged interactions), and it does not measure how often recall is right.
-
-These works report what a paper usually reports: an accuracy on a benchmark (for the memory ones, four or five answer options per question) and, in some, a cost. Lando et al. measure their memory at about 3.6 kB per minute [3] and the time per clip on consumer GPUs [4]. What none of the memory works puts numbers on is where the errors come from: how many questions a reader gets right with no memory at all, how much better a perfect describer would do, and what kind of false sentences end up in the diary. That is what this post is about.
-
 ### The system
 
 <a href="/assets/logs/ego-memory-assistant/system.jpg"><img src="/assets/logs/ego-memory-assistant/system.jpg" alt="Three layers: the Neon glasses and their phone; the describer and the diary on a DGX Spark; the reader that answers with the moment. Each arrow is labeled with what crosses it." style="width:100%;display:block;margin:0 auto;" /></a>
 
 The glasses' scene camera is wired to its phone. A small relay on the phone keeps 8 photos of every 15 seconds and sends only those to a DGX Spark on my desk. There, Gemma 4 31B writes one line in the first person for each 15-second window: *"In the kitchen, I stirred scrambled eggs in a pan on the stove."* Only the scene camera is used: Neon also records where I look and what I hear, but the prototype does not use either yet. The diary is text only. When a question comes in, the same model, now as a reader, sees only the diary, never the video, and answers citing the line it relied on, so the moment can be checked.
 
+### Related work
+
+The recipe is "describe, then read". A vision-language model watches the video in short pieces and writes down what happens; later, a language model reads that text to answer questions. LLoVi [1] and LifelongMemory [2] showed in 2023 that this simple recipe works on long videos. Lando, Forte, Farinella and Furnari [3, 4] turned it into an *online* episodic memory: the text is written as the video arrives, one piece every 15 or 30 seconds, and kept as a small diary. My prototype follows their design and their prompts.
+
+The closest system on real glasses is VisionClaw [5]: Meta Ray-Ban glasses stream to a phone, Gemini Live answers, and an agent carries out tasks for the user. Its users also ask about the past ("What did I do yesterday?"): recall is 12% of their requests. But the paper does not describe a running diary of what the camera sees (recall draws on saved items and logged interactions), and it does not measure how often recall is right.
+
+These works report what a paper usually reports: an accuracy on a benchmark (for the memory ones, four or five answer options per question) and, in some, a cost. Lando et al. measure their memory at about 3.6 kB per minute [3] and the time per clip on consumer GPUs [4]. What none of the memory works puts numbers on is where the errors come from: how many questions a reader gets right with no memory at all, how much better a perfect describer would do, and what kind of false sentences end up in the diary. That is what the rest of this post is about.
 
 ### On my own glasses: the window I closed
 
