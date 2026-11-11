@@ -1,6 +1,7 @@
 ---
 project: egoagent
-title: "Assembly: Raspberry Pi 5 + AI HAT+ 2"
+title: "Assembly: Raspberry Pi 5 + AI HAT+ 2"
+subtitle: "A 40 TOPS NPU on a Raspberry Pi, and the driver mismatch that cost me most of an afternoon"
 date: 2026-05-03
 summary: "Physical assembly of the Pi 5 16GB + AI HAT+ 2, driver installation for the Hailo-10H NPU, and first successful inference verification."
 tags: ["Raspberry Pi", "Hailo", "Hardware", "Setup"]

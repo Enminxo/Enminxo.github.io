@@ -1,6 +1,7 @@
 ---
 project: egoagent
 title: "Montaje: Raspberry Pi 5 + AI HAT+ 2"
+subtitle: "Un NPU de 40 TOPS sobre una Raspberry Pi, y el desajuste de drivers que me costó casi toda una tarde"
 date: 2026-05-03
 summary: "Montaje físico de la Pi 5 16GB + AI HAT+ 2, instalación del driver para el NPU Hailo-10H y primera verificación de inferencia."
 tags: ["Raspberry Pi", "Hailo", "Hardware", "Setup"]
