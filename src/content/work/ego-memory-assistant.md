@@ -16,4 +16,4 @@ url: https://github.com/Enminxo/ego-memory-assistant
 
 A prototype of an assistant for people with mild cognitive impairment or early Alzheimer's disease. The glasses' camera turns what you see into a short text diary, one entry every 15 seconds, and a language model answers questions from that diary, pointing to the moment its answer comes from.
 
-It runs on recordings and live, from Pupil Labs Neon glasses. The entry below takes it apart on 500 benchmark questions: how much the diary adds over a reader with no memory, what kinds of false lines the describer writes, and what it costs to store and to write the diary live.
+It runs on recordings and live, from Pupil Labs Neon glasses. The entry takes it apart on 500 benchmark questions: how much the diary adds over a reader with no memory, what kinds of false lines the describer writes, and what it costs to store and to write the diary live.
