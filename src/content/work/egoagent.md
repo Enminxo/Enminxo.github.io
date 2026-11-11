@@ -17,4 +17,4 @@ An end-to-end project to build a wearable AI agent that sees and understands the
 
 The goal: a lightweight, always-on device that can perceive egocentric video in real time using efficient vision-language models, without any cloud dependency.
 
-This is a living build log. Each entry documents a step of the journey.
+Each entry below documents a step of the journey.

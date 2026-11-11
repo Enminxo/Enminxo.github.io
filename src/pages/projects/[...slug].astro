@@ -26,7 +26,7 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 
-// Load build log entries for this project (oldest first = entry #1, #2, ...)
+// Load the entries of this project (oldest first = entry #1, #2, ...)
 const allLogs = await getCollection('logs');
 const projectLogs = allLogs
 	.filter((log) => log.data.project === entry.id && log.data.lang === 'en')
@@ -59,8 +59,7 @@ const projectLogs = allLogs
 				</div>
 
 				{projectLogs.length > 0 && (
-					<div class="build-log" id="log">
-						<h2 class="log-heading">Build Log</h2>
+					<div class="build-log" id="log" aria-label="Entries">
 						<ol class="log-list">
 							{projectLogs.map((log, i) => (
 								<li class="log-item">
@@ -189,19 +188,13 @@ const projectLogs = allLogs
 	.content :global(a:hover),
 	.content :global(a:focus) { text-decoration-color: currentColor; }
 
-	/* Build Log index */
+	/* Entries index */
 	.build-log {
 		max-width: 65ch;
 		margin-inline: auto;
 		margin-top: 4rem;
 		padding-top: 3rem;
 		border-top: 1px solid var(--gray-800);
-	}
-
-	.log-heading {
-		font-size: var(--text-2xl);
-		color: var(--gray-0);
-		margin-bottom: 1.75rem;
 	}
 
 	.log-list {
@@ -311,8 +304,6 @@ const projectLogs = allLogs
 		}
 
 		.content :global(blockquote) { font-size: var(--text-2xl); }
-
-		.log-heading { font-size: var(--text-4xl); }
 
 		.log-link {
 			padding: 1.5rem;
