@@ -8,7 +8,7 @@ img: /assets/logs/ego-memory-assistant/cover.jpg
 img_alt: "What the glasses saw: my hand pushing the office window shut"
 ---
 
-<img src="/assets/logs/ego-memory-assistant/logo.png" alt="Remembering for You: round glasses with a clock running backwards in one lens" style="width:200px;max-width:50%;display:block;margin:0 auto 1.5rem;" />
+<img src="/assets/logs/ego-memory-assistant/logo.png" alt="Remembering for You: round glasses with a clock running backwards in one lens" style="width:170px;max-width:45%;display:block;margin:2rem auto 1.5rem;border:none;box-shadow:none;border-radius:0;" />
 
 "Did I take my pill?" "Where did I leave my keys?" "Did I turn off the stove?" For someone with mild cognitive impairment or early Alzheimer's disease, these small questions come up every day, and nobody around may know the answer. A camera worn at eye level sees all of it. The hard part is not recording, it is answering.
 
