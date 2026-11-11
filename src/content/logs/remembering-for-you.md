@@ -12,7 +12,7 @@ img_alt: "What the glasses saw: my hand pushing the office window shut"
 
 We have all asked ourselves at some point: "Where did I leave my keys?" "Did I turn off the stove?" "Did I close the window?" It usually happens on a busy day, about something we did a few minutes earlier without paying attention. Glasses with a camera would have caught the moment we missed. The hard part is not recording. It is remembering the right things.
 
-This post is about a prototype that tries to do that on Pupil Labs Neon glasses. I try it first on my own glasses, then on a public benchmark of 500 questions, to see where its mistakes come from and what it costs to run live.
+This post is about a prototype that tries to do that. I tested it first on a small benchmark and then live on my own Pupil Labs Neon glasses, to see where its mistakes come from and what it costs to run.
 
 ### TL;DR
 
