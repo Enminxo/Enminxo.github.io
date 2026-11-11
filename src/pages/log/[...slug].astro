@@ -45,7 +45,7 @@ const dateFormatted = entry.data.date.toLocaleDateString('en-GB', {
 	<div class="stack gap-20">
 		<div class="stack gap-15">
 			<header>
-				<div class="wrapper stack gap-3">
+				<div class="wrapper entry-head stack gap-3">
 					{project && (
 						<a class="back-link" href={`/projects/${project.id}/`}>
 							<Icon icon="arrow-left" /> {project.data.title}
@@ -74,7 +74,8 @@ const dateFormatted = entry.data.date.toLocaleDateString('en-GB', {
 						<Content />
 					</div>
 					<aside class="toc" aria-label="Table of contents">
-						<nav>
+						<button class="toc-rail" id="toc-rail" type="button" aria-label="Contents"></button>
+						<nav class="toc-panel">
 							<p class="toc-title">Contents</p>
 							<ul class="toc-list" id="toc-list"></ul>
 						</nav>
@@ -110,6 +111,7 @@ const dateFormatted = entry.data.date.toLocaleDateString('en-GB', {
 
 <style>
 	header {
+		--measure: 44rem;
 		padding-bottom: 2.5rem;
 		border-bottom: 1px solid var(--gray-800);
 	}
@@ -165,23 +167,32 @@ const dateFormatted = entry.data.date.toLocaleDateString('en-GB', {
 		gap: 0.4rem;
 	}
 
-	/* Article layout: content + TOC sidebar */
-	.article-layout {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 3rem;
+	/* One centred reading column: under 90 characters per line, so the eye does not
+	   travel far to find the next one. The header lines up with it. */
+	.entry-head {
+		max-width: calc(var(--measure) + 3rem);
 	}
 
-	/* Content */
 	.content {
-		max-width: 65ch;
-		margin-inline: auto;
+		--measure: 44rem;
 		min-width: 0;
 		overflow-x: hidden;
 		overflow-wrap: break-word;
 	}
 
-	/* TOC sidebar — hidden on mobile */
+	.content > :global(*) {
+		max-width: var(--measure);
+		margin-inline: auto;
+	}
+
+	/* Justified text, hyphenated so the spaces between words stay even */
+	.content :global(p),
+	.content :global(li) {
+		text-align: justify;
+		hyphens: auto;
+	}
+
+	/* Floating index — hidden on mobile */
 	.toc {
 		display: none;
 	}
@@ -213,7 +224,19 @@ const dateFormatted = entry.data.date.toLocaleDateString('en-GB', {
 		border-radius: 1rem;
 		box-shadow: var(--shadow-sm);
 		border: 1px solid var(--gray-800);
-		width: 100%;
+	}
+
+	/* Figures share the column with the text: centred, never wider than it nor taller
+	   than most of the screen. */
+	.content :global(img),
+	.content :global(video) {
+		display: block;
+		margin-inline: auto;
+		width: auto;
+		height: auto;
+		max-width: min(100%, var(--measure));
+		max-height: 75vh;
+		object-fit: contain;
 	}
 
 	.content :global(pre) {
@@ -291,9 +314,15 @@ const dateFormatted = entry.data.date.toLocaleDateString('en-GB', {
 		margin: 2rem 0;
 	}
 
+	/* Headings, rules and blocks set their own margins above: keep them in the column too */
+	.content > :global(:is(h2, h3, h4, h5, h6, hr, blockquote, pre, ul, ol, table)) {
+		margin-inline: auto;
+	}
+
 	/* Prev/Next nav */
 	.log-nav {
-		max-width: 65ch;
+		max-width: 44rem;
+		margin-inline: auto;
 		margin-top: 4rem;
 		padding-top: 2rem;
 		border-top: 1px solid var(--gray-800);
@@ -342,22 +371,68 @@ const dateFormatted = entry.data.date.toLocaleDateString('en-GB', {
 		.entry-title { font-size: var(--text-4xl); }
 	}
 
-	@media (min-width: 75em) {
-		.article-layout {
-			grid-template-columns: 65ch 200px;
-			align-items: start;
-		}
-
-		.content {
-			margin-inline: 0;
-		}
-
+	@media (min-width: 50em) {
+		/* A rail of marks at the right edge, one per section. Hovering it (or focusing it,
+		   for keyboard and touch) opens the panel with the section titles. */
 		.toc {
 			display: block;
-			position: sticky;
-			top: 2rem;
-			max-height: calc(100vh - 4rem);
+			position: fixed;
+			top: 50%;
+			right: 0.5rem;
+			transform: translateY(-50%);
+			z-index: 20;
+		}
+
+		.toc-rail {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-end;
+			gap: 0.55rem;
+			padding: 0.75rem 0.4rem;
+			border: none;
+			background: none;
+			cursor: pointer;
+		}
+
+		.toc-rail :global(.toc-mark) {
+			display: block;
+			width: 1rem;
+			height: 2px;
+			border-radius: 2px;
+			background: var(--gray-600);
+			transition: background 0.15s, width 0.15s;
+		}
+
+		.toc-rail :global(.toc-mark--sub) { width: 0.6rem; }
+
+		.toc-rail :global(.toc-mark.active) {
+			background: var(--accent-regular);
+			width: 1.4rem;
+		}
+
+		.toc-panel {
+			position: absolute;
+			top: 50%;
+			right: 0;
+			width: 17rem;
+			max-height: 75vh;
 			overflow-y: auto;
+			padding: 1rem 1rem 1rem 0.75rem;
+			border: 1px solid var(--gray-800);
+			border-radius: 0.9rem;
+			background: var(--gray-999);
+			box-shadow: var(--shadow-md);
+			opacity: 0;
+			visibility: hidden;
+			transform: translate(0.75rem, -50%);
+			transition: opacity 0.18s, transform 0.18s, visibility 0.18s;
+		}
+
+		.toc:hover .toc-panel,
+		.toc:focus-within .toc-panel {
+			opacity: 1;
+			visibility: visible;
+			transform: translate(0, -50%);
 		}
 
 		.toc-title {
@@ -367,6 +442,7 @@ const dateFormatted = entry.data.date.toLocaleDateString('en-GB', {
 			letter-spacing: 0.08em;
 			color: var(--gray-400);
 			margin-bottom: 0.75rem;
+			padding-left: 0.75rem;
 		}
 
 		.toc :global(.toc-list) {
@@ -400,10 +476,15 @@ const dateFormatted = entry.data.date.toLocaleDateString('en-GB', {
 			font-size: 0.8rem;
 		}
 	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.toc-panel { transition: none; }
+	}
 </style>
 
 <script>
 	const tocList = document.getElementById('toc-list');
+	const tocRail = document.getElementById('toc-rail');
 	if (tocList) {
 		const headings = document.querySelectorAll<HTMLElement>('.content h2, .content h3');
 		headings.forEach((heading) => {
@@ -417,20 +498,27 @@ const dateFormatted = entry.data.date.toLocaleDateString('en-GB', {
 			a.textContent = heading.textContent;
 			li.appendChild(a);
 			tocList.appendChild(li);
+
+			const mark = document.createElement('span');
+			mark.className = heading.tagName === 'H3' ? 'toc-mark toc-mark--sub' : 'toc-mark';
+			mark.dataset.target = heading.id;
+			tocRail?.appendChild(mark);
 		});
 
-		// Highlight active section on scroll
-		const links = tocList.querySelectorAll<HTMLAnchorElement>('a');
-		const observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					const id = entry.target.id;
-					const link = tocList.querySelector<HTMLAnchorElement>(`a[href="#${id}"]`);
-					if (link) link.classList.toggle('active', entry.isIntersecting);
-				});
-			},
-			{ rootMargin: '0px 0px -70% 0px', threshold: 0 }
-		);
-		headings.forEach((h) => observer.observe(h));
+		// Highlight the section being read: the last heading that has passed the top third of the screen
+		const marks = tocRail ? Array.from(tocRail.querySelectorAll<HTMLElement>('.toc-mark')) : [];
+		const links = Array.from(tocList.querySelectorAll<HTMLAnchorElement>('a'));
+		const highlightCurrent = () => {
+			const line = window.innerHeight / 3;
+			let current = -1;
+			headings.forEach((heading, i) => {
+				if (heading.getBoundingClientRect().top <= line) current = i;
+			});
+			links.forEach((link, i) => link.classList.toggle('active', i === current));
+			marks.forEach((mark, i) => mark.classList.toggle('active', i === current));
+		};
+		window.addEventListener('scroll', highlightCurrent, { passive: true });
+		window.addEventListener('resize', highlightCurrent);
+		highlightCurrent();
 	}
 </script>
