@@ -22,8 +22,10 @@ const publications = (await getCollection('publications'))
 	.slice(0, 3);
 
 // Currently Building: latest log entry + its parent project
-const allLogs = await getCollection('logs');
-const latestLog = allLogs.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())[0];
+const allLogs = (await getCollection('logs'))
+	.filter((log) => log.data.lang === 'en')
+	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const latestLog = allLogs[0];
 const allWork = await getCollection('work');
 const activeProject = latestLog
 	? allWork.find((w) => w.id === latestLog.data.project)
@@ -73,7 +75,7 @@ const activeProject = latestLog
 								{latestLog.data.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
 							</time>
 							<p class="now-update-title">{latestLog.data.title}</p>
-							<a class="now-follow-link" href={`/projects/${activeProject.id}/`}>
+							<a class="now-follow-link" href={`/log/${latestLog.id}/`}>
 								{t('building.follow')} <Icon icon="arrow-right" size="0.9em" />
 							</a>
 						</div>
