@@ -1,6 +1,7 @@
 ---
 project: infrastructure
 title: "Configuración del servidor: DGX Spark para fine-tuning local"
+subtitle: "De la caja a un servidor de GPU accesible desde cualquier sitio, y los tropiezos del camino"
 date: 2026-04-30
 summary: "Unboxing y puesta en marcha del DGX Spark — el servidor de cómputo local para el fine-tuning de modelos de visión-lenguaje."
 tags: ["DGX Spark", "Fine-Tuning", "NVIDIA", "Setup"]

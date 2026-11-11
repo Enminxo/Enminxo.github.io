@@ -1,6 +1,7 @@
 ---
 project: infrastructure
 title: "Server Setup: DGX Spark for Local Fine-Tuning"
+subtitle: "From the box to a GPU server I can reach from anywhere, and the gotchas along the way"
 date: 2026-04-30
 summary: "Unboxing and onboarding the DGX Spark — the local compute backbone for fine-tuning vision-language models for EgoAgent."
 tags: ["DGX Spark", "Fine-Tuning", "NVIDIA", "Setup"]

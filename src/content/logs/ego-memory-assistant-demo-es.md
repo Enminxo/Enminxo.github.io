@@ -1,6 +1,7 @@
 ---
 project: ego-memory-assistant
 title: "Un diario que recuerda: preguntarle a mis gafas qué hice"
+subtitle: "Una demo de memoria episódica en unas gafas Neon, y cómo la saqué en directo con una wifi floja"
 date: 2026-10-28
 summary: "Una cámara en las gafas escribe un diario de texto del día y un modelo de lenguaje responde preguntas a partir de él. Qué funciona, qué falla y cómo saqué el vídeo en directo de las gafas Neon con una wifi floja."
 tags: ["Egocentric AI", "VLM", "Pupil Labs Neon", "Episodic Memory", "Open Source"]
