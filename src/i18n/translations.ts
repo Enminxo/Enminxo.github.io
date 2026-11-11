@@ -59,7 +59,6 @@ const t = {
 
 		// Log entries
 		'log.en_only': 'This entry is written in English.',
-		'log.build_log': 'Build Log',
 		'log.entry': 'Entry',
 		'log.prev': 'Previous',
 		'log.next': 'Next',
@@ -132,7 +131,6 @@ const t = {
 
 		// Log entries
 		'log.en_only': 'Esta entrada está escrita en inglés.',
-		'log.build_log': 'Diario de construcción',
 		'log.entry': 'Entrada',
 		'log.prev': 'Anterior',
 		'log.next': 'Siguiente',
