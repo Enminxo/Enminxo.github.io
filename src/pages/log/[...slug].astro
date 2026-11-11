@@ -45,7 +45,7 @@ const dateFormatted = entry.data.date.toLocaleDateString('en-GB', {
 	<div class="stack gap-20">
 		<div class="stack gap-15">
 			<header>
-				<div class="wrapper stack gap-3">
+				<div class="wrapper entry-head stack gap-3">
 					{project && (
 						<a class="back-link" href={`/projects/${project.id}/`}>
 							<Icon icon="arrow-left" /> {project.data.title}
@@ -111,6 +111,7 @@ const dateFormatted = entry.data.date.toLocaleDateString('en-GB', {
 
 <style>
 	header {
+		--measure: 44rem;
 		padding-bottom: 2.5rem;
 		border-bottom: 1px solid var(--gray-800);
 	}
@@ -166,11 +167,29 @@ const dateFormatted = entry.data.date.toLocaleDateString('en-GB', {
 		gap: 0.4rem;
 	}
 
-	/* Content: the full width of the page */
+	/* One centred reading column: under 90 characters per line, so the eye does not
+	   travel far to find the next one. The header lines up with it. */
+	.entry-head {
+		max-width: calc(var(--measure) + 3rem);
+	}
+
 	.content {
+		--measure: 44rem;
 		min-width: 0;
 		overflow-x: hidden;
 		overflow-wrap: break-word;
+	}
+
+	.content > :global(*) {
+		max-width: var(--measure);
+		margin-inline: auto;
+	}
+
+	/* Justified text, hyphenated so the spaces between words stay even */
+	.content :global(p),
+	.content :global(li) {
+		text-align: justify;
+		hyphens: auto;
 	}
 
 	/* Floating index — hidden on mobile */
@@ -207,15 +226,15 @@ const dateFormatted = entry.data.date.toLocaleDateString('en-GB', {
 		border: 1px solid var(--gray-800);
 	}
 
-	/* The text spans the page, but figures keep a readable size: centred, never wider
-	   than 56rem nor taller than most of the screen. */
+	/* Figures share the column with the text: centred, never wider than it nor taller
+	   than most of the screen. */
 	.content :global(img),
 	.content :global(video) {
 		display: block;
 		margin-inline: auto;
 		width: auto;
 		height: auto;
-		max-width: min(100%, 56rem);
+		max-width: 100%;
 		max-height: 75vh;
 		object-fit: contain;
 	}
@@ -295,8 +314,15 @@ const dateFormatted = entry.data.date.toLocaleDateString('en-GB', {
 		margin: 2rem 0;
 	}
 
+	/* Headings, rules and blocks set their own margins above: keep them in the column too */
+	.content > :global(:is(h2, h3, h4, h5, h6, hr, blockquote, pre, ul, ol, table)) {
+		margin-inline: auto;
+	}
+
 	/* Prev/Next nav */
 	.log-nav {
+		max-width: 44rem;
+		margin-inline: auto;
 		margin-top: 4rem;
 		padding-top: 2rem;
 		border-top: 1px solid var(--gray-800);
@@ -346,11 +372,6 @@ const dateFormatted = entry.data.date.toLocaleDateString('en-GB', {
 	}
 
 	@media (min-width: 50em) {
-		/* Room on the right for the rail of marks */
-		.article-layout {
-			padding-inline-end: 2rem;
-		}
-
 		/* A rail of marks at the right edge, one per section. Hovering it (or focusing it,
 		   for keyboard and touch) opens the panel with the section titles. */
 		.toc {
