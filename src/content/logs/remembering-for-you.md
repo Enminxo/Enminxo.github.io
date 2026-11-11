@@ -59,8 +59,6 @@ So the diary says I touched the window, and in one of two runs that the window "
 
 **Writing is the expensive part.** On the benchmark's frames (720×540), the large model takes a median of 9.6 s per 15-second window and the small one 1.8 s. The small model's diary answers about 10 points fewer questions ([part 2](/log/remembering-for-you-part-2/) explains how that was measured), so those 10 points cost five times the time. Live, at the full size of Neon's scene camera (1600×1200), the large model took 29 s per window in a 10-minute session, so 20 of 46 windows were dropped. The app skips them on purpose rather than describe an old picture as if it were the present. Most of the time goes into reading the images: with the GPU to itself, 8 frames take about 11 s at 960×540, 18 s at 1280×960 and 26 s at full size.
 
-Lando et al. measured time per clip on desktop GPUs [4], and VisualClaw [7] lowers the cost of cloud calls by sending fewer frames. Neither runs on glasses, where a slow describer does not lower a score: it loses parts of the day.
-
 ### What I take from it
 
 The recipe runs on real glasses, and keeping the diary is almost free: a few hundred bytes per minute. Two things stand in the way. With the model that writes it well, the diary is written more slowly than life goes by, so parts of the day are lost. And even when the photos catch the moment, the diary can miss the change: it saw my hand on the window, not the window closing. These live numbers come from short sessions, by one person, in one office. [Part 2](/log/remembering-for-you-part-2/) asks how often mistakes like these happen, on 500 questions about other people's videos, and pulls apart where they come from.
@@ -73,4 +71,3 @@ The recipe runs on real glasses, and keeping the diary is almost free: a few hun
 4. Lando, Forte and Furnari, [*Exploring Multimodal LMMs for Online Episodic Memory Question Answering on the Edge*](https://arxiv.org/abs/2602.22455), arXiv:2602.22455, 2026.
 5. Liu, Lee, Gonzalez, Gonzalez-Franco and Suzuki, [*VisionClaw: Always-On AI Agents through Smart Glasses*](https://arxiv.org/abs/2604.03486), arXiv:2604.03486, 2026.
 6. Grauman et al., [*Ego4D: Around the World in 3,000 Hours of Egocentric Video*](https://ego4d-data.org), CVPR 2022.
-7. [*VisualClaw: A Real-Time, Personalized Agent for the Physical World*](https://arxiv.org/abs/2606.16295), arXiv:2606.16295, 2026.
