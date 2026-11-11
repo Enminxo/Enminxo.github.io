@@ -17,7 +17,9 @@ This post is about a prototype that tries to do that. I tested it first on a sma
 
 ### TL;DR
 
-I built an assistant on Pupil Labs Neon glasses that turns what the camera sees into a short written diary, so that later you can ask it things like "Did I take my pill?". Tested on 500 multiple-choice questions about first-person videos, the diary clearly helps (53% right instead of 31%), but it also writes down things that never happened, and some of its right answers are good guesses rather than memories. Storing the diary costs almost nothing, under 1 kB per minute, but writing it does: on my glasses the good model needs about 29 seconds for every 15 seconds of life, so it falls behind.
+- I built a memory assistant on Pupil Labs Neon glasses: every 15 seconds a vision-language model writes one line in a diary, and a language model answers questions from that diary.
+- On 500 questions from QAEgo4D, the diary raises the score from 31% (no diary at all) to 53%, and a diary written by people gets only 59%. Where it fails is clearer than the score: a small model invents objects, both models write down things that did not happen, and the diary misses what falls between two photos.
+- Storing the diary costs under 1 kB per minute. Writing it is the expensive part: on my glasses the good model needs about 29 seconds for every 15 seconds of life, so it falls behind.
 
 ---
 
