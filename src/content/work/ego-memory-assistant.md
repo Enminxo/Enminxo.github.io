@@ -1,6 +1,6 @@
 ---
 title: Episodic Memory Assistant
-description: A wearable camera writes a text diary of your day, and you can ask it "did I take my pill?". Where its errors come from, and what it costs to run live on Pupil Labs Neon glasses.
+description: A wearable camera writes a text diary of your day, and you can ask it "where did I leave my keys?". Where its errors come from, and what it costs to run live on Pupil Labs Neon glasses.
 publishDate: 2026-10-28 00:00:00
 tags:
   - Egocentric AI
