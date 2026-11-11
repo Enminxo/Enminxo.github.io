@@ -24,8 +24,9 @@ const statusColor = data.status ? (statusColors[data.status] ?? 'var(--gray-600)
 			: <div class="card-gradient" />
 		}
 	</div>
+	{data.logo && <img class="card-logo" src={data.logo} alt="" aria-hidden="true" loading="lazy" decoding="async" />}
 	<div class="card-body">
-		<span class="title">{data.title}</span>
+		<span class:list={['title', { 'with-logo': data.logo }]}>{data.title}</span>
 		<p class="desc">{data.description}</p>
 		<div class="meta">
 			<div class="tags">
@@ -73,6 +74,20 @@ const statusColor = data.status ? (statusColors[data.status] ?? 'var(--gray-600)
 		height: 100%;
 		object-fit: cover;
 		opacity: 0.3;
+	}
+
+	.card-logo {
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		z-index: 1;
+		width: 3.5rem;
+		height: 3.5rem;
+		filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
+	}
+
+	.title.with-logo {
+		padding-right: 4rem;
 	}
 
 	.card-gradient {
@@ -148,6 +163,15 @@ const statusColor = data.status ? (statusColors[data.status] ?? 'var(--gray-600)
 			height: 20rem;
 			border-radius: 1.5rem;
 		}
+
+		.card-logo {
+			top: 1.5rem;
+			right: 1.5rem;
+			width: 5.5rem;
+			height: 5.5rem;
+		}
+
+		.title.with-logo { padding-right: 6.5rem; }
 
 		.card-body { padding: 1.75rem; }
 		.title { font-size: var(--text-xl); }
