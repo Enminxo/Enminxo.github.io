@@ -10,6 +10,7 @@ tags:
 status: prototyping
 img: /assets/logs/ego-memory-assistant/cover.jpg
 img_alt: "What the glasses saw: a hand pushing an office window shut"
+logo: /assets/logs/ego-memory-assistant/logo.png
 url: https://github.com/Enminxo/ego-memory-assistant
 ---
 
