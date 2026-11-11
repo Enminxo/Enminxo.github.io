@@ -59,8 +59,6 @@ So the diary says I touched the window, and in one of two runs that the window "
 
 **Writing is the expensive part.** On the benchmark's frames (720×540), the large model takes a median of 9.6 s per 15-second window and the small one 1.8 s. The small model's diary answers about 10 points fewer questions ([part 2](/log/remembering-for-you-part-2/) explains how that was measured), so those 10 points cost five times the time. Live, at the full size of Neon's scene camera (1600×1200), the large model took 29 s per window in a 10-minute session, so 20 of 46 windows were dropped. The app skips them on purpose rather than describe an old picture as if it were the present. Most of the time goes into reading the images: with the GPU to itself, 8 frames take about 11 s at 960×540, 18 s at 1280×960 and 26 s at full size.
 
-**The network is the third cost.** The whole scene video is about 5 Mbit/s, and the office Wi-Fi did not carry it: on a busy afternoon, 13 of 22 live windows had no fresh video. Moving the work into the phone fixed that. The relay reads the video inside the phone and sends only the 8 photos of each window, about 0.7 Mbit/s; in a 10-minute test all 403 photos arrived, about 0.4 s after they were taken.
-
 Lando et al. measured time per clip on desktop GPUs [4], and VisualClaw [7] lowers the cost of cloud calls by sending fewer frames. Neither runs on glasses, where a slow describer does not lower a score: it loses parts of the day.
 
 ### What I take from it
