@@ -44,20 +44,12 @@ const projectLogs = allLogs
 							<div class="tags">
 								{entry.data.tags.map((tag) => <Pill>{tag}</Pill>)}
 							</div>
-							<p class="description">{entry.data.description}</p>
 						</div>
 					</Hero>
 				</div>
 			</header>
 
 			<main class="wrapper">
-				<div class="stack gap-10 content">
-					{entry.data.img && <img src={entry.data.img} alt={entry.data.img_alt || ''} />}
-					<div class="content">
-						<Content />
-					</div>
-				</div>
-
 				{projectLogs.length > 0 && (
 					<div class="build-log" id="log" aria-label="Entries">
 						<ol class="log-list">
@@ -86,6 +78,10 @@ const projectLogs = allLogs
 						</ol>
 					</div>
 				)}
+
+				<div class:list={['content', { 'after-entries': projectLogs.length > 0 }]}>
+					<Content />
+				</div>
 			</main>
 		</div>
 		<ContactCTA lang={lang} />
@@ -115,11 +111,6 @@ const projectLogs = allLogs
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.5rem;
-	}
-
-	.description {
-		font-size: var(--text-lg);
-		max-width: 54ch;
 	}
 
 	.content {
@@ -192,8 +183,12 @@ const projectLogs = allLogs
 	.build-log {
 		max-width: 65ch;
 		margin-inline: auto;
-		margin-top: 4rem;
-		padding-top: 3rem;
+	}
+
+	/* The project's longer text, below its entries */
+	.after-entries {
+		margin-top: 3rem;
+		padding-top: 2.5rem;
 		border-top: 1px solid var(--gray-800);
 	}
 
