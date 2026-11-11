@@ -6,6 +6,7 @@ const t = {
 		// Nav
 		'nav.home': 'Home',
 		'nav.projects': 'Projects',
+		'nav.writing': 'Writing',
 		'nav.research': 'Research',
 		'nav.now': 'Now',
 		'nav.contact': 'Contact',
@@ -50,7 +51,13 @@ const t = {
 		// Currently building
 		'building.label': 'Currently Building',
 		'building.latest': 'Latest update',
-		'building.follow': 'Follow the build',
+		'building.follow': 'Read the entry',
+
+		// Writing
+		'writing.title': 'Writing',
+		'writing.subtitle': 'Everything I have written here, newest first.',
+		'writing.more': 'More entries',
+		'writing.all': 'All entries',
 
 		// Now page
 		'now.title': 'Now',
@@ -78,6 +85,7 @@ const t = {
 		// Nav
 		'nav.home': 'Inicio',
 		'nav.projects': 'Proyectos',
+		'nav.writing': 'Escritos',
 		'nav.research': 'Investigación',
 		'nav.now': 'Ahora',
 		'nav.contact': 'Contacto',
@@ -122,7 +130,13 @@ const t = {
 		// Currently building
 		'building.label': 'Construyendo ahora',
 		'building.latest': 'Última actualización',
-		'building.follow': 'Seguir el build',
+		'building.follow': 'Leer la entrada',
+
+		// Writing
+		'writing.title': 'Escritos',
+		'writing.subtitle': 'Todo lo que he escrito aquí, lo más reciente primero.',
+		'writing.more': 'Más entradas',
+		'writing.all': 'Todas las entradas',
 
 		// Now page
 		'now.title': 'Ahora',

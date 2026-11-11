@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import ContactCTA from '../components/ContactCTA.astro';
+import EntryList from '../components/EntryList.astro';
+import Hero from '../components/Hero.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { useTranslations } from '../i18n/translations';
+
+const lang = 'en';
+const t = useTranslations(lang);
+
+// Every entry, newest first, whatever project it belongs to.
+const entries = (await getCollection('logs'))
+	.filter((log) => log.data.lang === 'en')
+	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const projects = await getCollection('work');
+---
+
+<BaseLayout title="Writing | Enmin Zhong" description={t('writing.subtitle')} lang={lang}>
+	<div class="stack gap-20">
+		<main class="wrapper stack gap-8">
+			<Hero title={t('writing.title')} tagline={t('writing.subtitle')} align="start" />
+			<div class="entries">
+				<EntryList entries={entries} projects={projects} />
+			</div>
+		</main>
+		<ContactCTA lang={lang} />
+	</div>
+</BaseLayout>
+
+<style>
+	.entries {
+		max-width: 75ch;
+	}
+</style>

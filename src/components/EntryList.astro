@@ -1,0 +1,122 @@
+---
+// A list of entries that link straight to each post, with the project each one belongs to.
+import type { CollectionEntry } from 'astro:content';
+import Icon from './Icon.astro';
+
+interface Props {
+	entries: CollectionEntry<'logs'>[];
+	projects: CollectionEntry<'work'>[];
+}
+
+const { entries, projects } = Astro.props;
+
+const projectTitle = (projectId: string): string | undefined =>
+	projects.find((p) => p.id === projectId)?.data.title;
+---
+
+<ol class="entry-list">
+	{entries.map((entry) => (
+		<li>
+			<a class="entry-link" href={`/log/${entry.id}/`}>
+				<div class="entry-body">
+					<div class="entry-meta">
+						<time datetime={entry.data.date.toISOString()}>
+							{entry.data.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+						</time>
+						{projectTitle(entry.data.project) && (
+							<span class="entry-project">{projectTitle(entry.data.project)}</span>
+						)}
+					</div>
+					<h3 class="entry-title">{entry.data.title}</h3>
+					<p class="entry-summary">{entry.data.summary}</p>
+				</div>
+				<Icon icon="arrow-right" size="1em" class="entry-arrow" />
+			</a>
+		</li>
+	))}
+</ol>
+
+<style>
+	.entry-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.entry-link {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		padding: 1.25rem;
+		border: 1px solid var(--gray-800);
+		border-radius: 0.75rem;
+		background: var(--gray-999_40);
+		text-decoration: none;
+		color: inherit;
+		transition: border-color 0.15s, background 0.15s;
+	}
+
+	.entry-link:hover,
+	.entry-link:focus-visible {
+		border-color: var(--accent-regular);
+		background: var(--gray-900, #111);
+	}
+
+	.entry-body {
+		flex: 1;
+		min-width: 0;
+	}
+
+	.entry-meta {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+		flex-wrap: wrap;
+		margin-bottom: 0.25rem;
+	}
+
+	.entry-meta time {
+		font-size: var(--text-sm);
+		color: var(--gray-400);
+	}
+
+	.entry-project {
+		font-size: var(--text-xs, 0.72rem);
+		color: var(--gray-300);
+		background: var(--gray-800);
+		border-radius: 999px;
+		padding: 0.1rem 0.55rem;
+	}
+
+	.entry-title {
+		font-size: var(--text-md);
+		color: var(--gray-0);
+		font-weight: 600;
+		line-height: 1.3;
+		margin: 0 0 0.2rem;
+	}
+
+	.entry-summary {
+		font-size: var(--text-sm);
+		color: var(--gray-400);
+		line-height: 1.4;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.entry-link :global(.entry-arrow) {
+		color: var(--gray-600);
+		flex-shrink: 0;
+		transition: color 0.15s, transform 0.15s;
+	}
+
+	.entry-link:hover :global(.entry-arrow) {
+		color: var(--accent-regular);
+		transform: translateX(2px);
+	}
+</style>

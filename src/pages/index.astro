@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import CallToAction from '../components/CallToAction.astro';
 import ContactCTA from '../components/ContactCTA.astro';
+import EntryList from '../components/EntryList.astro';
 import Grid from '../components/Grid.astro';
 import Icon from '../components/Icon.astro';
 import PortfolioPreview from '../components/PortfolioPreview.astro';
@@ -22,8 +23,12 @@ const publications = (await getCollection('publications'))
 	.slice(0, 3);
 
 // Currently Building: latest log entry + its parent project
-const allLogs = await getCollection('logs');
-const latestLog = allLogs.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())[0];
+const allLogs = (await getCollection('logs'))
+	.filter((log) => log.data.lang === 'en')
+	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const latestLog = allLogs[0];
+// The entries after the latest one, which already has its own card
+const moreLogs = allLogs.slice(1, 4);
 const allWork = await getCollection('work');
 const activeProject = latestLog
 	? allWork.find((w) => w.id === latestLog.data.project)
@@ -73,11 +78,24 @@ const activeProject = latestLog
 								{latestLog.data.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
 							</time>
 							<p class="now-update-title">{latestLog.data.title}</p>
-							<a class="now-follow-link" href={`/projects/${activeProject.id}/`}>
+							<a class="now-follow-link" href={`/log/${latestLog.id}/`}>
 								{t('building.follow')} <Icon icon="arrow-right" size="0.9em" />
 							</a>
 						</div>
 					</div>
+				</section>
+			)}
+
+			<!-- More entries, one click from the post -->
+			{moreLogs.length > 0 && (
+				<section class="more-entries">
+					<div class="more-entries-head">
+						<span class="more-entries-label">{t('writing.more')}</span>
+						<a class="more-entries-all" href="/writing/">
+							{t('writing.all')} <Icon icon="arrow-right" size="0.9em" />
+						</a>
+					</div>
+					<EntryList entries={moreLogs} projects={allWork} />
 				</section>
 			)}
 
@@ -157,6 +175,40 @@ const activeProject = latestLog
 </BaseLayout>
 
 <style>
+	/* More entries */
+	.more-entries {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.more-entries-head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+
+	.more-entries-label {
+		font-size: var(--text-sm);
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--gray-300);
+	}
+
+	.more-entries-all {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		font-size: var(--text-sm);
+		font-weight: 600;
+		color: var(--accent-regular);
+		text-decoration: none;
+	}
+
+	.more-entries-all:hover { text-decoration: underline; }
+
 	/* Currently Building */
 	.now-building {
 		display: flex;
