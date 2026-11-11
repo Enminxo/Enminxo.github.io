@@ -69,12 +69,6 @@ With the large model's diary, the reader gets 53.4%: **22.2 points above the bli
 
 The human-written diary is the useful comparison. Ego4D's narrations were written by people watching the video, so a diary made from them shows roughly what a much better describer would give. It reaches 59.4%, only 6.0 points above the large model [0.7, 11.1], and with a different order of the options the gap is 4.8 [−0.2, 9.8]: small, and not robust. Two things follow. The large model already writes most of what a person would. And even with a person's diary, 4 questions in 10 stay wrong, so better perception alone would not fix most of what remains. (Narrations describe actions and skip many objects, so this is a soft ceiling: on questions about people, the model's diary even does better.)
 
-### The 22 points are 150 questions won and 39 lost
-
-<a href="/assets/logs/ego-memory-assistant/dots.jpg"><img src="/assets/logs/ego-memory-assistant/dots.jpg" alt="500 dots in four groups: 150 right only with the diary, 39 right only without it, 117 right either way, 194 wrong either way" style="width:100%;display:block;margin:0 auto;" /></a>
-
-An average hides which questions move. Question by question, the diary turns 150 wrong answers into right ones and 39 right answers into wrong ones; 117 are right either way and 194 wrong either way. The gain is the difference, 111 questions out of 500. With the other option order the picture is the same (165 won, 49 lost). Some of the swaps, in both directions, are noise: given a different prompt, the reader can change a guess it never had grounds for. Only the difference is the effect. And almost a quarter of the questions (117) are answered right with no memory at all.
-
 ### What the small model invents comes from its own prompt
 
 <a href="/assets/logs/ego-memory-assistant/echo.jpg"><img src="/assets/logs/ego-memory-assistant/echo.jpg" alt="The prompt lists keys, wallet, phone, glasses and bags as examples; the small model writes about picking up keys in a third of all windows" style="width:100%;display:block;margin:0 auto;" /></a>
