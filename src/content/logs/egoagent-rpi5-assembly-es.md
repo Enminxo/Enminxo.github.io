@@ -11,7 +11,7 @@ lang: es
 translation_of: egoagent-rpi5-assembly
 ---
 
-La Raspberry Pi 5 es el nodo de cómputo en el borde para EgoAgent — ejecutará inferencia en tiempo real sobre el vídeo de una cámara portable. El AI HAT+ 2 añade un NPU Hailo-10H dedicado con 40 TOPS, que es lo que hace factible la inferencia de modelos de visión-lenguaje en el dispositivo sin depender de la nube.
+La Raspberry Pi 5 es mi banco de pruebas para ejecutar modelos de visión-lenguaje en el propio dispositivo, sin depender de la nube. El AI HAT+ 2 añade un NPU Hailo-10H dedicado con 40 TOPS, que es lo que hace factible ese tipo de inferencia en una placa tan pequeña.
 
 Esta entrada cubre el montaje del hardware y la puesta en marcha del driver del NPU. Llevó una tarde entera, con la mayor parte del tiempo perdida en un problema con los drivers que detallo más abajo — tómate ese atajo.
 
@@ -201,10 +201,4 @@ Para un ResNet-50 en INT8, deberías ver cientos de FPS — los 40 TOPS son real
 
 ---
 
-### Próximos pasos
-
-- Conseguir el Camera Module 3 Wide y probar la latencia de inferencia en tiempo real de extremo a extremo
-- Actualizar a HailoRT 5.2.0 y verificar compatibilidad con el Dataflow Compiler para Gemma 4 E4B
-- Empezar a construir el pipeline de datos egocéntrico con los elementos GStreamer de TAPPAS
-
-El fine-tuning correrá en el DGX Spark, no en la Pi — para el setup de cómputo, ver [Configuración del servidor: DGX Spark para fine-tuning local](/es/log/dgx-spark-build-log/).
+El trabajo pesado, como hacer fine-tuning de un modelo, no es para la Pi. Para eso uso un DGX Spark: ver [Configuración del servidor: DGX Spark para fine-tuning local](/es/log/dgx-spark-build-log/).

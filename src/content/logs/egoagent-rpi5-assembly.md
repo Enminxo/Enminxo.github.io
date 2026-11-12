@@ -9,7 +9,7 @@ img: /assets/Raspberry/Raspberry/IMG_8290.jpeg
 img_alt: "Raspberry Pi 5 and active cooler just out of the box"
 ---
 
-The Raspberry Pi 5 is the edge compute node for EgoAgent — it will run real-time inference on a wearable camera stream. The AI HAT+ 2 adds a dedicated Hailo-10H NPU with 40 TOPS, which is what makes on-device vision-language inference feasible without a cloud dependency.
+The Raspberry Pi 5 is my test bench for running vision-language models on the device itself, with no cloud behind it. The AI HAT+ 2 adds a dedicated Hailo-10H NPU with 40 TOPS, which is what makes that kind of inference feasible on such a small board.
 
 This entry covers the hardware assembly and getting the NPU driver running. It took about an afternoon, with most of the time lost to a driver mismatch that I document below — save yourself that detour.
 
@@ -199,10 +199,4 @@ For a ResNet-50 at INT8, you should see hundreds of FPS — the 40 TOPS number i
 
 ---
 
-### What's next
-
-- Get the Camera Module 3 Wide and test real-time inference latency end-to-end
-- Upgrade to HailoRT 5.2.0 and verify Dataflow Compiler compatibility with Gemma 4 E4B
-- Start building the egocentric data pipeline with TAPPAS GStreamer elements
-
-Fine-tuning will run on the DGX Spark, not on the Pi — for the compute setup, see [Server Setup: DGX Spark for Local Fine-Tuning](/log/dgx-spark-build-log/).
+Heavier work, like fine-tuning a model, does not belong on the Pi. For that I use a DGX Spark: see [Server Setup: DGX Spark for Local Fine-Tuning](/log/dgx-spark-build-log/).
