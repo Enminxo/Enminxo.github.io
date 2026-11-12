@@ -75,6 +75,10 @@ The window on my own glasses, in [part 1](/log/remembering-for-you/), is the sam
 
 The recipe works: a text diary of a few hundred bytes per minute adds 22 points. But one score mixes very different things: questions that need no memory, lines the describer invents or negates, and moments that fall between two frames. Pulled apart, they point to different fixes. The describer's habits, like echoing its prompt or writing what did not happen, are cheap to see and partly cheap to fix. What falls between frames, and the time it takes to write the diary live ([part 1](/log/remembering-for-you/)), are the hard part, and that is where I am working next. Neon's gaze is an obvious lead there: where I look could choose which frames get described and which objects get named, the two places where the describer fails today. That is an idea, not a result yet.
 
+### Code
+
+The code of this evaluation (the diaries, the reader with no diary, the diary built from the narrations, the counts of prompt echoes and negations, and the checks on the frames) is in the [`experiments/describer_eval`](https://github.com/Enminxo/ego-memory-assistant/tree/worktree-describer-eval/experiments/describer_eval) folder of the [same repository](https://github.com/Enminxo/ego-memory-assistant), on a separate branch for now. QAEgo4D and Ego4D are not included: both require signing their licenses.
+
 ### References
 
 1. Zhang et al., [*A Simple LLM Framework for Long-Range Video Question-Answering*](https://arxiv.org/abs/2312.17235) (LLoVi), EMNLP 2024.
