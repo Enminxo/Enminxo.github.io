@@ -63,6 +63,10 @@ So the diary says I touched the window, and in one of two runs that the window "
 
 The recipe runs on real glasses, and keeping the diary is almost free: a few hundred bytes per minute. Two things stand in the way. With the model that writes it well, the diary is written more slowly than life goes by, so parts of the day are lost. And even when the photos catch the moment, the diary can miss the change: it saw my hand on the window, not the window closing. These live numbers come from short sessions, by one person, in one office. [Part 2](/log/remembering-for-you-part-2/) asks how often mistakes like these happen, on 500 questions about other people's videos, and pulls apart where they come from.
 
+### Code
+
+The code is open, under the MIT license: [github.com/Enminxo/ego-memory-assistant](https://github.com/Enminxo/ego-memory-assistant). It has the demo page, the import of recordings from the Neon Companion app, and the relay that runs on the glasses' phone for the live mode.
+
 ### References
 
 1. Zhang et al., [*A Simple LLM Framework for Long-Range Video Question-Answering*](https://arxiv.org/abs/2312.17235) (LLoVi), EMNLP 2024.
