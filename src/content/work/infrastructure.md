@@ -7,7 +7,7 @@ tags:
   - NVIDIA
   - Tailscale
   - DevOps
-status: in progress
+status: completed
 img: /assets/DGX_SPARK_cropped.jpeg
 img_alt: "NVIDIA DGX Spark — local AI compute unit"
 ---
