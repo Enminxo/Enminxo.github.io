@@ -1,6 +1,6 @@
 ---
 title: Infrastructure
-description: Local compute and networking stack supporting EgoAgent and other projects — DGX Spark, Tailscale mesh, and development tooling.
+description: "Local compute and networking stack behind my projects: DGX Spark, Tailscale mesh, and development tooling."
 publishDate: 2026-04-30 00:00:00
 tags:
   - DGX Spark

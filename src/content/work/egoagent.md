@@ -1,20 +1,18 @@
 ---
-title: EgoAgent
-description: Building a wearable egocentric AI agent on Raspberry Pi 5 with Hailo AI HAT 2 — from hardware assembly to real-time first-person vision-language interaction.
+title: Edge AI on a Raspberry Pi
+description: What it costs to run vision-language models on a Raspberry Pi 5 with a Hailo-10H NPU.
 publishDate: 2026-05-03 00:00:00
 tags:
   - Raspberry Pi
   - Hailo
-  - Egocentric AI
   - VLM
+  - Edge AI
   - Hardware
 status: in progress
 img: /assets/Raspberry/Raspberry/IMG_8320.jpeg
 img_alt: Raspberry Pi 5 with AI HAT 2 attached
 ---
 
-An end-to-end project to build a wearable AI agent that sees and understands the world from a first-person perspective — running locally on a Raspberry Pi 5 with Hailo AI HAT 2.
+Tests of vision-language models running on the device itself, a Raspberry Pi 5 with the Hailo-10H NPU of the AI HAT+ 2, with no cloud behind it: how long an answer takes, how warm the board gets, and how much the answers are worth.
 
-The goal: a lightweight, always-on device that can perceive egocentric video in real time using efficient vision-language models, without any cloud dependency.
-
-Each entry documents a step of the journey.
+Each entry documents one step.
