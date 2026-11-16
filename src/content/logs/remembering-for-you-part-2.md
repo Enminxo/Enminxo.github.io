@@ -67,10 +67,6 @@ Yet all three diaries answer right ("on the wood"), while the reader with no dia
 
 A diary that fills one Word page every 4 minutes adds 22 points, but the score mixes very different things: questions that need no memory, lines the describer invents or negates, and moments between photos. The describer's habits are cheap to see and partly to fix. What falls between photos, and writing as fast as life goes ([part 1](/log/remembering-for-you/)), are the hard part and where I am working next. Neon's gaze is an obvious lead: where I look could choose which photos get described. That is an idea, not a result yet.
 
-### Code
-
-The evaluation code is in [`experiments/describer_eval`](https://github.com/Enminxo/ego-memory-assistant/tree/worktree-describer-eval/experiments/describer_eval) of the [same repository](https://github.com/Enminxo/ego-memory-assistant), on a separate branch for now. QAEgo4D and Ego4D need their own licenses.
-
 ### References
 
 1. Zhang et al., [*A Simple LLM Framework for Long-Range Video Question-Answering*](https://arxiv.org/abs/2312.17235) (LLoVi), EMNLP 2024.
