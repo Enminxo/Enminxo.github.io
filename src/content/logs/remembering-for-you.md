@@ -13,6 +13,10 @@ img_alt: "What the glasses saw: my hand pushing the office window shut"
 
 "Did I turn off the stove?" "Did I close the window?" We forget what we did minutes ago without paying attention; camera glasses would have caught it. The hard part is not recording; it is remembering the right things. This part shows a prototype that tries, on one minute of my day with Pupil Labs Neon glasses, and what it costs. [Part 2](/log/remembering-for-you-part-2/) takes its mistakes apart on 500 benchmark questions.
 
+Here is one afternoon with the prototype, which I call Dora: unloading a 3D print in the lab, a stop at the vending machine, then leaving. That evening I ask about my day, and Dora answers from the diary alone. The last question is one it gets wrong.
+
+<video poster="/assets/logs/ego-memory-assistant/dora-day-poster.jpg" controls muted playsinline preload="metadata" style="width:100%;display:block;margin:0 auto;border-radius:12px;" aria-label="One afternoon with Dora: what the glasses saw, the diary Dora wrote, and the evening questions with Dora's answers"><source src="/assets/logs/ego-memory-assistant/dora-day.mp4" type="video/mp4"></video>
+
 ### TL;DR
 
 - Every 15 seconds, an AI model looks at 8 photos from my glasses and writes one line in a diary; then, as a reader, it answers my questions from the diary alone.
