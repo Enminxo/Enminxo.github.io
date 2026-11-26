@@ -32,8 +32,8 @@ const t = {
 		'research.area1.desc': 'First-person video perception and action recognition from wearable cameras.',
 		'research.area2.title': 'VLM for Edge',
 		'research.area2.desc': 'Quantization and efficient inference of vision-language models on embedded hardware.',
-		'research.area3.title': 'Multimodal Perception',
-		'research.area3.desc': 'Adding time, motion and other sensor signals to visual perception.',
+		'research.area3.title': 'Multimodal Understanding',
+		'research.area3.desc': 'Combining video with motion, language and other signals to understand what is happening.',
 
 		// Projects page
 		'projects.title': 'My Projects',
@@ -106,8 +106,8 @@ const t = {
 		'research.area1.desc': 'Percepción de vídeo en primera persona y reconocimiento de acciones desde cámaras portables.',
 		'research.area2.title': 'VLM para Edge',
 		'research.area2.desc': 'Cuantización e inferencia eficiente de modelos de visión-lenguaje en hardware embebido.',
-		'research.area3.title': 'Percepción Multimodal',
-		'research.area3.desc': 'Sumar a la percepción visual el tiempo, el movimiento y otras señales de los sensores.',
+		'research.area3.title': 'Comprensión Multimodal',
+		'research.area3.desc': 'Combinar el vídeo con el movimiento, el lenguaje y otras señales para entender qué está pasando.',
 
 		// Projects page
 		'projects.title': 'Mis Proyectos',
