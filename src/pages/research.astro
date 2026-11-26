@@ -22,12 +22,11 @@ const publications = (await getCollection('publications')).filter((p) => !p.data
 				<h2 class="section-title">{t('research.lines')}</h2>
 				<ol class="path">
 					{lines.map((line, i) => (
-						<li class={`step step-${line.data.status}`}>
+						<li class="step">
 							<span class="step-num" aria-hidden="true">{i + 1}</span>
 							<div class="research-card">
 								<div class="card-header">
 									<h3>{line.data.title}</h3>
-									<span class={`status status-${line.data.status}`}>{line.data.status}</span>
 								</div>
 								<p>{line.data.description}</p>
 								{line.data.evidence.length > 0 && (
@@ -114,18 +113,10 @@ const publications = (await getCollection('publications')).filter((p) => !p.data
 	.step:last-child { padding-bottom: 0; }
 	.step:not(:last-child)::before { content: ''; position: absolute; left: 1.25rem; top: 2.5rem; bottom: 0; width: 2px; transform: translateX(-50%); background: var(--gray-800); }
 	.step-num { width: 2.5rem; height: 2.5rem; border-radius: 50%; display: grid; place-items: center; font-weight: 700; background: var(--accent-regular); color: var(--accent-text-over); }
-	.step-completed .step-num { background: var(--gray-800); color: var(--gray-200); }
-	.step-next .step-num { background: transparent; border: 2px dashed var(--accent-regular); color: var(--accent-regular); }
-	.step-next .research-card { border-style: dashed; }
 	.step-links { list-style: none; padding: 0; margin-top: 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
 	.research-card { min-width: 0; border: 1px solid var(--gray-800); border-radius: 0.75rem; padding: 1.5rem; background-color: var(--gray-999_40); }
 	.card-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
 	.card-header h3 { font-size: var(--text-lg); color: var(--gray-0); }
-	.status { font-size: var(--text-sm); padding: 0.2rem 0.6rem; border-radius: 999rem; text-transform: uppercase; letter-spacing: 0.05em; }
-	.status-active { background-color: var(--accent-regular); color: var(--accent-text-over); }
-	.status-paused,
-	.status-completed { background-color: var(--gray-800); color: var(--gray-300); }
-	.status-next { border: 1px dashed var(--accent-regular); color: var(--accent-regular); }
 
 	/* Publications */
 	.pub-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 1.25rem; }
