@@ -56,8 +56,9 @@ export const collections = {
 			title_es: z.string(),
 			description: z.string(),
 			description_es: z.string(),
-			status: z.enum(['active', 'paused', 'completed']),
+			status: z.enum(['active', 'paused', 'completed', 'next']),
 			order: z.number().default(0),
+			evidence: z.array(z.object({ label: z.string(), href: z.string() })).default([]),
 		}),
 	}),
 };
