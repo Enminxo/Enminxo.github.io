@@ -17,7 +17,7 @@ const t = {
 
 		// Bio
 		'bio.title': 'About me',
-		'bio.p1': 'PhD researcher at GTI-UPM working on multimodal AI for egocentric vision: helping models understand everyday life from the point of view of the person wearing the camera. My goal is to fuse video with other signals, like hand motion and language, so that smart glasses can understand the context around you, efficiently enough to run on the device itself.',
+		'bio.p1': 'PhD researcher at GTI-UPM working on multimodal AI for egocentric vision: helping models understand everyday life from the point of view of the person wearing the camera. My goal is to fuse video with other signals, like hand motion and language, so that smart glasses can understand the context around you.',
 		'bio.p2': 'Outside the lab, I enjoy building things at the intersection of AI and the physical — side projects that usually start as a sketch and end up as a prototype.',
 
 		// Interests
@@ -91,7 +91,7 @@ const t = {
 
 		// Bio
 		'bio.title': 'Sobre mí',
-		'bio.p1': 'Investigo en mi doctorado en el GTI-UPM la IA multimodal para visión egocéntrica: que los modelos entiendan el día a día desde el punto de vista de quien lleva la cámara. Mi objetivo es fusionar el vídeo con otras señales, como el movimiento de las manos y el lenguaje, para que unas gafas inteligentes entiendan el contexto que te rodea, con la eficiencia suficiente para funcionar en el propio dispositivo.',
+		'bio.p1': 'Investigo en mi doctorado en el GTI-UPM la IA multimodal para visión egocéntrica: que los modelos entiendan el día a día desde el punto de vista de quien lleva la cámara. Mi objetivo es fusionar el vídeo con otras señales, como el movimiento de las manos y el lenguaje, para que unas gafas inteligentes entiendan el contexto que te rodea.',
 		'bio.p2': 'Fuera del laboratorio, disfruto construyendo cosas en la intersección entre la IA y lo físico — proyectos que suelen empezar como un boceto y acaban siendo un prototipo.',
 
 		// Interests
