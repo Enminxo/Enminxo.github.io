@@ -12,19 +12,19 @@ const t = {
 
 		// Hero
 		'hero.tagline': 'Researcher by day, builder by curiosity.',
-		'hero.role': 'Computer Vision Researcher',
+		'hero.role': 'PhD Researcher | Multimodal AI & Egocentric Vision | Wearable Intelligence',
 		'hero.institution': 'GTI · UPM · Madrid',
 
 		// Bio
 		'bio.title': 'About me',
-		'bio.p1': 'Researcher at GTI-UPM working on egocentric video understanding and embodied intelligence — how AI perceives the world from a first-person perspective. I\'m particularly drawn to making that intelligence run lean: optimizing vision-language models for edge devices like Raspberry Pi, where computation meets the real world.',
+		'bio.p1': 'PhD researcher at GTI-UPM working on multimodal AI for egocentric vision: helping models understand everyday life from the point of view of the person wearing the camera. My goal is to fuse video with other signals, like hand motion and language, so that smart glasses can understand the context around you, efficiently enough to run on the device itself.',
 		'bio.p2': 'Outside the lab, I enjoy building things at the intersection of AI and the physical — side projects that usually start as a sketch and end up as a prototype.',
 
 		// Interests
 		'interests.label': 'Interests',
-		'interests.1': 'Egocentric video',
-		'interests.2': 'Embodied intelligence',
-		'interests.3': 'VLM for edge devices',
+		'interests.1': 'Egocentric Vision',
+		'interests.2': 'Multimodal Understanding',
+		'interests.3': 'Wearable Intelligence',
 		'interests.4': '3D printing & NFC',
 
 		// Research areas (skills box)
@@ -32,8 +32,8 @@ const t = {
 		'research.area1.desc': 'First-person video perception and action recognition from wearable cameras.',
 		'research.area2.title': 'VLM for Edge',
 		'research.area2.desc': 'Quantization and efficient inference of vision-language models on embedded hardware.',
-		'research.area3.title': 'Embodied Intelligence',
-		'research.area3.desc': 'Connecting perception models to physical world interaction and action understanding.',
+		'research.area3.title': 'Multimodal Perception',
+		'research.area3.desc': 'Adding time, motion and other sensor signals to visual perception.',
 
 		// Projects page
 		'projects.title': 'My Projects',
@@ -43,7 +43,7 @@ const t = {
 		// Research page
 		'research.title': 'Research',
 		'research.subtitle': 'My work at GTI-UPM, Universidad Politécnica de Madrid.',
-		'research.lines': 'Research Lines',
+		'research.lines': 'Research Path',
 		'research.publications': 'Publications',
 		'research.nopubs': 'Publications coming soon.',
 
@@ -86,19 +86,19 @@ const t = {
 
 		// Hero
 		'hero.tagline': 'Investigador de día, constructor por curiosidad.',
-		'hero.role': 'Investigador en Visión por Computador',
+		'hero.role': 'Investigación doctoral | IA multimodal y visión egocéntrica | Inteligencia en wearables',
 		'hero.institution': 'GTI · UPM · Madrid',
 
 		// Bio
 		'bio.title': 'Sobre mí',
-		'bio.p1': 'Investigador en el GTI-UPM trabajando en comprensión de vídeo egocéntrico e inteligencia encarnada: cómo la IA percibe el mundo desde una perspectiva en primera persona. Me apasiona hacer esa inteligencia eficiente: optimizando modelos de visión-lenguaje para dispositivos como Raspberry Pi, donde la computación se encuentra con el mundo real.',
+		'bio.p1': 'Investigo en mi doctorado en el GTI-UPM la IA multimodal para visión egocéntrica: que los modelos entiendan el día a día desde el punto de vista de quien lleva la cámara. Mi objetivo es fusionar el vídeo con otras señales, como el movimiento de las manos y el lenguaje, para que unas gafas inteligentes entiendan el contexto que te rodea, con la eficiencia suficiente para funcionar en el propio dispositivo.',
 		'bio.p2': 'Fuera del laboratorio, disfruto construyendo cosas en la intersección entre la IA y lo físico — proyectos que suelen empezar como un boceto y acaban siendo un prototipo.',
 
 		// Interests
 		'interests.label': 'Intereses',
-		'interests.1': 'Vídeo egocéntrico',
-		'interests.2': 'Inteligencia encarnada',
-		'interests.3': 'VLM para edge',
+		'interests.1': 'Visión egocéntrica',
+		'interests.2': 'Comprensión multimodal',
+		'interests.3': 'Inteligencia en wearables',
 		'interests.4': 'Impresión 3D y NFC',
 
 		// Research areas
@@ -106,8 +106,8 @@ const t = {
 		'research.area1.desc': 'Percepción de vídeo en primera persona y reconocimiento de acciones desde cámaras portables.',
 		'research.area2.title': 'VLM para Edge',
 		'research.area2.desc': 'Cuantización e inferencia eficiente de modelos de visión-lenguaje en hardware embebido.',
-		'research.area3.title': 'Inteligencia Encarnada',
-		'research.area3.desc': 'Conectar modelos de percepción con la interacción física y la comprensión de acciones.',
+		'research.area3.title': 'Percepción Multimodal',
+		'research.area3.desc': 'Sumar a la percepción visual el tiempo, el movimiento y otras señales de los sensores.',
 
 		// Projects page
 		'projects.title': 'Mis Proyectos',
@@ -117,7 +117,7 @@ const t = {
 		// Research page
 		'research.title': 'Investigación',
 		'research.subtitle': 'Mi trabajo en el GTI-UPM, Universidad Politécnica de Madrid.',
-		'research.lines': 'Líneas de Investigación',
+		'research.lines': 'Trayectoria de Investigación',
 		'research.publications': 'Publicaciones',
 		'research.nopubs': 'Publicaciones próximamente.',
 

@@ -20,17 +20,39 @@ const publications = (await getCollection('publications')).filter((p) => !p.data
 
 			<section>
 				<h2 class="section-title">{t('research.lines')}</h2>
-				<ul class="research-list">
-					{lines.map((line) => (
-						<li class="research-card">
-							<div class="card-header">
-								<h3>{line.data.title}</h3>
-								<span class={`status status-${line.data.status}`}>{line.data.status}</span>
+				<ol class="path">
+					{lines.map((line, i) => (
+						<li class={`step step-${line.data.status}`}>
+							<span class="step-num" aria-hidden="true">{i + 1}</span>
+							<div class="research-card">
+								<div class="card-header">
+									<h3>{line.data.title}</h3>
+									<span class={`status status-${line.data.status}`}>{line.data.status}</span>
+								</div>
+								<p>{line.data.description}</p>
+								{line.data.evidence.length > 0 && (
+									<ul class="step-links">
+										{line.data.evidence.map((item) => {
+											const external = item.href.startsWith('http');
+											return (
+												<li>
+													<a
+														href={item.href}
+														class="pub-link"
+														target={external ? '_blank' : undefined}
+														rel={external ? 'noopener noreferrer' : undefined}
+													>
+														<Icon icon="arrow-right" size="0.9em" /> {item.label}
+													</a>
+												</li>
+											);
+										})}
+									</ul>
+								)}
 							</div>
-							<p>{line.data.description}</p>
 						</li>
 					))}
-				</ul>
+				</ol>
 			</section>
 
 			<section>
@@ -86,14 +108,24 @@ const publications = (await getCollection('publications')).filter((p) => !p.data
 		margin-bottom: 1.5rem;
 	}
 
-	/* Research lines */
-	.research-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 1.25rem; }
-	.research-card { border: 1px solid var(--gray-800); border-radius: 0.75rem; padding: 1.5rem; background-color: var(--gray-999_40); }
+	/* Research path: numbered steps joined by a vertical line */
+	.path { list-style: none; padding: 0; display: flex; flex-direction: column; }
+	.step { position: relative; display: grid; grid-template-columns: 2.5rem 1fr; gap: 1rem; padding-bottom: 1.5rem; }
+	.step:last-child { padding-bottom: 0; }
+	.step:not(:last-child)::before { content: ''; position: absolute; left: 1.25rem; top: 2.5rem; bottom: 0; width: 2px; transform: translateX(-50%); background: var(--gray-800); }
+	.step-num { width: 2.5rem; height: 2.5rem; border-radius: 50%; display: grid; place-items: center; font-weight: 700; background: var(--accent-regular); color: var(--accent-text-over); }
+	.step-completed .step-num { background: var(--gray-800); color: var(--gray-200); }
+	.step-next .step-num { background: transparent; border: 2px dashed var(--accent-regular); color: var(--accent-regular); }
+	.step-next .research-card { border-style: dashed; }
+	.step-links { list-style: none; padding: 0; margin-top: 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
+	.research-card { min-width: 0; border: 1px solid var(--gray-800); border-radius: 0.75rem; padding: 1.5rem; background-color: var(--gray-999_40); }
 	.card-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
 	.card-header h3 { font-size: var(--text-lg); color: var(--gray-0); }
 	.status { font-size: var(--text-sm); padding: 0.2rem 0.6rem; border-radius: 999rem; text-transform: uppercase; letter-spacing: 0.05em; }
 	.status-active { background-color: var(--accent-regular); color: var(--accent-text-over); }
-	.status-paused { background-color: var(--gray-800); color: var(--gray-300); }
+	.status-paused,
+	.status-completed { background-color: var(--gray-800); color: var(--gray-300); }
+	.status-next { border: 1px dashed var(--accent-regular); color: var(--accent-regular); }
 
 	/* Publications */
 	.pub-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 1.25rem; }
