@@ -1,30 +1,27 @@
-# Astro Starter Kit: Portfolio
+# enminxo.github.io
+
+Personal website of Enmin Zhong, PhD researcher at GTI-UPM (Madrid) working on multimodal AI and egocentric vision for wearable intelligence. Live at [enminxo.github.io](https://enminxo.github.io).
+
+It holds my research path and publications, side projects, and the build logs that go with them.
+
+## Run it locally
 
 ```sh
-npm create astro@latest -- --template portfolio
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # static site in dist/
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/portfolio)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/portfolio)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/portfolio/devcontainer.json)
+## Where things live
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- `src/content/research/`: the steps of the research path
+- `src/content/publications/`: papers (`featured: true` puts one on the home page)
+- `src/content/work/`: projects (`hidden: true` keeps one off the Projects list)
+- `src/content/logs/`: build-log entries, in English and Spanish
+- `src/i18n/translations.ts`: interface text
 
-![portfolio](https://user-images.githubusercontent.com/357379/210779178-a98f0fb7-6b1a-4068-894c-8e1403e26654.jpg)
+## Deploy
 
-## 🧞 Commands
+Every push to `main` builds the site and publishes it to GitHub Pages (`.github/workflows/deploy.yml`).
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Built with [Astro](https://astro.build), starting from its portfolio template.
