@@ -17,10 +17,10 @@ const latestEntries = (await getCollection('logs'))
 const projects = await getCollection('work');
 ---
 
-<BaseLayout title="Now | Enmin Zhong" description={t('now.intro')} lang={lang}>
+<BaseLayout title="Now | Enmin Zhong" lang={lang}>
 	<div class="stack gap-20">
 		<main class="wrapper stack gap-8">
-			<Hero title={t('now.title')} tagline={t('now.intro')} align="start" />
+			<Hero title={t('now.title')} align="start" />
 
 			{latestEntries.length > 0 && (
 				<section class="content latest">

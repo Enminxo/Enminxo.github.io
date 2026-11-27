@@ -90,11 +90,6 @@ const activeProject = latestLog
 						<h3>{t('research.publications')}</h3>
 					</header>
 					<ul class="pub-list">
-						<li class="pub-card pub-card--next">
-							<span class="pub-next-icon">📄</span>
-							<h4 class="pub-title">What's next?</h4>
-							<p class="pub-authors">Work in progress — stay tuned.</p>
-						</li>
 						{publications.map((pub) => (
 							<li class="pub-card">
 								{pub.data.venue ? <div class="pub-venue">{pub.data.venue} · {pub.data.year}</div> : <div class="pub-venue">{pub.data.year}</div>}
@@ -352,30 +347,6 @@ const activeProject = latestLog
 		font-weight: 500;
 	}
 	.pub-link:hover { text-decoration: underline; }
-
-	.pub-card--next {
-		border-style: dashed;
-		border-color: var(--gray-700);
-		background: transparent;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		text-align: center;
-		gap: 0.5rem;
-	}
-
-	.pub-next-icon { font-size: 2rem; line-height: 1; }
-
-	.pub-card--next .pub-title {
-		color: var(--gray-400);
-		font-size: var(--text-md);
-	}
-
-	.pub-card--next .pub-authors {
-		margin-bottom: 0;
-		color: var(--gray-600);
-	}
 
 	.cta-row {
 		display: flex;

@@ -54,7 +54,6 @@ const t = {
 
 		// Now page
 		'now.title': 'Now',
-		'now.intro': 'What I\'m focused on this month.',
 		'now.latest': 'Latest entries',
 
 		// Log entries
@@ -126,7 +125,6 @@ const t = {
 
 		// Now page
 		'now.title': 'Ahora',
-		'now.intro': 'En qué estoy centrado este mes.',
 		'now.latest': 'Últimas entradas',
 
 		// Log entries
