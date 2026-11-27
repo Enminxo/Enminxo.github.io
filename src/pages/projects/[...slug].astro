@@ -16,7 +16,8 @@ interface Props {
 }
 
 export async function getStaticPaths() {
-	const work = await getCollection('work');
+	// Hidden projects get no page at all (and so no sitemap entry).
+	const work = (await getCollection('work')).filter((entry) => !entry.data.hidden);
 	return work.map((entry) => ({
 		params: { slug: entry.id },
 		props: { entry },

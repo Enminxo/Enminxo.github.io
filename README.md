@@ -16,7 +16,7 @@ npm run build    # static site in dist/
 
 - `src/content/research/`: the steps of the research path
 - `src/content/publications/`: papers (`featured: true` puts one on the home page)
-- `src/content/work/`: projects (`hidden: true` keeps one off the Projects list)
+- `src/content/work/`: projects (`hidden: true` keeps one off the site: no page, no listing)
 - `src/content/logs/`: build-log entries, in English and Spanish
 - `src/i18n/translations.ts`: interface text
 
