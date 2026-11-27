@@ -55,9 +55,7 @@ const t = {
 		// Now page
 		'now.title': 'Now',
 		'now.intro': 'What I\'m focused on this month.',
-		'now.updated': 'Last updated',
 		'now.latest': 'Latest entries',
-		'now.focus': 'What I am focused on',
 
 		// Log entries
 		'log.en_only': 'This entry is written in English.',
@@ -129,9 +127,7 @@ const t = {
 		// Now page
 		'now.title': 'Ahora',
 		'now.intro': 'En qué estoy centrado este mes.',
-		'now.updated': 'Actualizado',
 		'now.latest': 'Últimas entradas',
-		'now.focus': 'En qué estoy centrado',
 
 		// Log entries
 		'log.en_only': 'Esta entrada está escrita en inglés.',
